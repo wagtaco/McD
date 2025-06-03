@@ -924,6 +924,7 @@
       ]]></look>
       <displayverbs type="stringlist">
         <value>Look at</value>
+        <value>Jump up and down</value>
       </displayverbs>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
       <prefix>the</prefix>
@@ -934,6 +935,24 @@
           MoveObject (player, trainee waist)
         }
       </jumpto>
+      <jumpupanddown type="script"><![CDATA[
+        msg ("You start jumping up and down on the counter, waving your arms at the gigantic trainee.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("Her eyes finally lock on to you and widen. \"Oh my god...\" she squeaks, cheeks burning as she realizes it's her shrunken trainer.")
+            msg ("<br/>Clearly flustered and thrilled by the sudden power she has over you, she scoops you up and rushes to the employee bathroom. With a nervous giggle, she tugs open her waistband and drops you against the warm front of her panties, letting the elastic snap shut.")
+            wait {
+              ClearScreen
+              MoveObject (player, trainee panties)
+            }
+          }
+          else {
+            msg ("The trainee notices the tiny speck hopping around and grimaces. \"Ew, a bug,\" she mutters.")
+            msg ("<br/>Her palm slams down on you, grinding your body into the counter before she wipes away the smear without another thought.")
+            finish
+          }
+        }
+      ]]></jumpupanddown>
     </object>
     <object name="blob of ketchup">
       <look>A giant, delicious, red condiment.</look>
@@ -960,6 +979,11 @@
     <property>jumpto</property>
     <pattern>jump to</pattern>
     <defaultexpression>"You can't jump to " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>jumpupanddown</property>
+    <pattern>jump up and down</pattern>
+    <defaultexpression>"You can't jump up and down " + object.article + "."</defaultexpression>
   </verb>
   <object name="fries">
     <description><![CDATA[<br/>You cling to a fry, feeling the bag being shaken around as it's carried around across the kitchen.<br/><br/>The busy noises of the kitchen are deafening.  The bag is dropped, and you hear ice being dispensed, before the soda machine begins running. The giantess above you begins taking an order, and you realize that you're being served through the drive thru.<br/><br/>It's just a matter of time before you're served with the {object:fries}.]]></description>
@@ -1094,6 +1118,12 @@
     <enter type="script">
       EnableTimer (trainee taint sweat)
     </enter>
+  </object>
+  <object name="trainee panties">
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are pressed against the front of her</descprefix>
+    <alias>trainee's panties</alias>
+    <description><![CDATA[<br/>Warm cotton engulfs you as the trainee drops you into her panties. The fabric is slightly damp from her nervous excitement, and every subtle movement rubs you against her mound. She can't hide the thrill in her voice whenever you squirm.]]></description>
   </object>
   <object name="trainee shoe">
     <descprefix>You are near the mouth of the</descprefix>
