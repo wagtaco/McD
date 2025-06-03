@@ -915,7 +915,7 @@
           this.timesexamined = 0
         }
         if (this.timesexamined >= 4) {
-          msg ("<br/>As you gawk at the trainee yet again, she wrinkles her nose and lets out a loud snort. The sudden suction yanks your microscopic body from the counter, pulling you straight up her nostril. Wet nose hairs scrape across your skin as another snort drags you deeper, until you're swallowed by the humid darkness of her nasal passage.<br/><br/>You try to scream, but the force of her sniff sucks you down the back of her throat and into her lungs. Everything is hot, damp and constricting as the massive girl's body finishes the job. Your short life ends inside her airway, just another speck caught in a single snort.")
+          msg ("<br/>As you gawk at the trainee yet again, a gust from the ceiling vent makes the counter shudder. The sudden jolt knocks you off balance, sliding you right in front of her massive face. She wrinkles her nose and lets out a loud snort. The sudden suction yanks your microscopic body from the counter, pulling you straight up her nostril. Wet nose hairs scrape across your skin as another snort drags you deeper, until you're swallowed by the humid darkness of her nasal passage.<br/><br/>You try to scream, but the force of her sniff sucks you down the back of her throat and into her lungs. Everything is hot, damp and constricting as the massive girl's body finishes the job. Your short life ends inside her airway, just another speck caught in a single snort.")
           finish
         }
         else {
