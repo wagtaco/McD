@@ -15,6 +15,7 @@
   <object name="table top">
     <isroom />
     <descprefix>You are on</descprefix>
+    <look>The table stretches before you like an endless wooden plain, every plate and cup a looming monument to your shrunken size.</look>
     <description><![CDATA[<br/>The polished wood of the table stretches for what feels like miles. A towering teacup looms nearby and plates of treats dwarf you. The maid who was serving you continues working, unaware that her customer has vanished from sight. Maybe you could get the {object:maid}'s attention or hide in the {object:teacup}. The edge of the table leads down to the {object:cafe floor}.]]></description>
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <beforefirstenter type="script"><![CDATA[
@@ -34,7 +35,7 @@
       ]]></climbin>
     </object>
     <object name="maid">
-      <look>Your waitress, dressed in a frilly black and white uniform, bustles between tables.</look>
+      <look>Your waitress towers above you, her frilly black and white uniform clinging to every voluptuous curve. The bodice strains around breasts that loom like mountains, each motion sending waves through her deep cleavage.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
         <value>Call</value>
@@ -45,7 +46,20 @@
         msg ("You yell up at the maid, but your voice is tiny over the cafe chatter.")
       ]]></call>
       <jumpupanddown type="script"><![CDATA[
-        msg ("You jump and wave wildly. For a moment it looks like she notices, but she simply sweeps some crumbs off the table, nearly brushing you off as well.")
+        msg ("You jump and wave wildly, hoping to be noticed.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("Her eyes widen as she finally spots you. \"Oh my gosh, a tiny toy!\" she squeals in delight.")
+            msg ("<br/>Giggling, she gently plucks you up between her fingertips and tucks you inside her uniform, nestling you into the warm softness of her bra.")
+            wait {
+              ClearScreen
+              MoveObject (player, maid bra)
+            }
+          }
+          else {
+            msg ("For a moment it looks like she notices, but she simply sweeps some crumbs off the table, nearly brushing you off as well.")
+          }
+        }
       ]]></jumpupanddown>
       <jumpto type="script"><![CDATA[
         msg ("You make a running leap toward her apron.")
@@ -100,6 +114,7 @@
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are in</descprefix>
+    <look>The porcelain walls rise around you like slippery cliffs, the warm tea sloshing below your waist.</look>
     <description><![CDATA[<br/>Warm liquid surrounds you like a sweet-smelling ocean. You might be able to climb back {object:out of the cup}.]]></description>
     <object name="out of the cup">
       <look>The rim of the cup towers above.</look>
@@ -125,6 +140,7 @@
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are clinging to</descprefix>
+    <look>The apron billows around you like a massive sail, and the distant floor swirls far below as the maid moves.</look>
     <description><![CDATA[<br/>The crisp apron sways with the maid's movements. From here you can see the floor rushing by far beneath your dangling feet.]]></description>
     <object name="jump down">
       <look>The drop to the floor looks daunting but survivable.</look>
@@ -141,10 +157,102 @@
     </object>
   </object>
 
+  <object name="maid bra">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are pressed inside</descprefix>
+    <look>The snug fabric cave squeezes around you, dominated by the enormous breast filling the bra.</look>
+    <description><![CDATA[<br/>Soft, warm fabric surrounds you and everything smells faintly of perfume. You are wedged deep in the maid's bra, squashed against her large, plump, milky white breast. Every breath is filled with her scent and each movement makes the heavy mound ripple around you.]]></description>
+    <enter type="script"><![CDATA[
+      set (player, "bra_count", 0)
+    ]]></enter>
+    <object name="breast">
+      <look>The massive breast swells before you like a pale hillside, its silky skin slick with heat and impossibly huge.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Kiss</value>
+        <value>Struggle</value>
+      </displayverbs>
+      <kiss type="script"><![CDATA[
+        if (not HasInt(player, "bra_count")) {
+          set (player, "bra_count", 0)
+        }
+        set (player, "bra_count", GetInt(player, "bra_count") + 1)
+        if (GetInt(player, "bra_count") = 1) {
+          msg ("You lean forward and kiss the maid's skin. The warm flesh rises above you like a living wall, salty and sweet on your tongue.")
+        }
+        elseif (GetInt(player, "bra_count") = 2) {
+          msg ("Unable to resist, you kiss again. The colossal boob pulses around you, its heavy weight nearly engulfing your tiny form with each heartbeat.")
+        }
+        else {
+          msg ("Lost in your obsession, you keep kissing until the maid sighs happily and squeezes her breasts together. The soft avalanche crushes the life from you.")
+          finish
+        }
+      ]]></kiss>
+      <struggle type="script"><![CDATA[
+        if (not HasInt(player, "bra_count")) {
+          set (player, "bra_count", 0)
+        }
+        set (player, "bra_count", GetInt(player, "bra_count") + 1)
+        if (GetInt(player, "bra_count") = 1) {
+          msg ("You thrash in panic, but the yielding flesh simply molds around you, pinning you tighter against the monumental breast.")
+        }
+        elseif (GetInt(player, "bra_count") = 2) {
+          msg ("Your frantic movements only make the maid giggle. Her titanic boob jiggles and shifts, sliding you even deeper into its pillowy mass.")
+        }
+        else {
+          msg ("Exhausted, you keep struggling until the weight of her breast seals over your face. Darkness and softness smother you forever.")
+          finish
+        }
+      ]]></struggle>
+    </object>
+    <object name="nipple">
+      <look>The maid's rosy nipple juts out before you like a mountain peak.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Lick</value>
+        <value>Kiss</value>
+      </displayverbs>
+      <kiss type="script"><![CDATA[
+        if (not HasInt(player, "bra_count")) {
+          set (player, "bra_count", 0)
+        }
+        set (player, "bra_count", GetInt(player, "bra_count") + 1)
+        if (GetInt(player, "bra_count") = 1) {
+          msg ("You plant a kiss on the gigantic nipple, your body dwarfed by the stiff peak.")
+        }
+        elseif (GetInt(player, "bra_count") = 2) {
+          msg ("You nuzzle and kiss eagerly, the huge nub pulsing beneath your lips.")
+        }
+        else {
+          msg ("Lost in pleasure, the maid hugs her breasts together, the enormous nipple crushing you mercilessly.")
+          finish
+        }
+      ]]></kiss>
+      <lick type="script"><![CDATA[
+        if (not HasInt(player, "bra_count")) {
+          set (player, "bra_count", 0)
+        }
+        set (player, "bra_count", GetInt(player, "bra_count") + 1)
+        if (GetInt(player, "bra_count") = 1) {
+          msg ("You drag your tongue along the vast nipple, tasting her warm skin and perfume.")
+        }
+        elseif (GetInt(player, "bra_count") = 2) {
+          msg ("Your licking sends tiny shivers through the colossal breast, pressing you deeper against it.")
+        }
+        else {
+          msg ("Overwhelmed, the maid presses a finger against the nipple, unknowingly smashing you flat.")
+          finish
+        }
+      ]]></lick>
+    </object>
+  </object>
+
   <object name="cafe floor room">
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>cafe floor</alias>
     <descprefix>You are on</descprefix>
+    <look>The floor stretches around you like a glossy wasteland, towering furniture dwarfing you on every side.</look>
     <description><![CDATA[<br/>Tables tower like buildings all around. Shoes thud across the vast floor, and you spot the {object:maid} moving briskly between customers. You could try climbing a {object:chair leg} or attempt to get the maid's attention again from down here.]]></description>
     <object name="chair leg">
       <look>One of the wooden chair legs near you.</look>
@@ -166,9 +274,22 @@
     <defaultexpression>"You can't climb " + object.article + "."</defaultexpression>
   </verb>
 
+  <verb>
+    <property>struggle</property>
+    <pattern>struggle</pattern>
+    <defaultexpression>"You can't struggle " + object.article + "."</defaultexpression>
+  </verb>
+
+  <verb>
+    <property>lick</property>
+    <pattern>lick</pattern>
+    <defaultexpression>"You can't lick " + object.article + "."</defaultexpression>
+  </verb>
+
   <object name="chair seat">
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are on</descprefix>
+    <look>The vast cushion rises around you like a bouncy field, far wider than any park.</look>
     <description><![CDATA[<br/>The fabric cushion feels like a bouncy field beneath you. From here you can see onto the table again or drop back to the {object:cafe floor}.]]></description>
     <object name="return to floor">
       <look>The floor is far below.</look>
