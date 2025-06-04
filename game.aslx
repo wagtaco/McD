@@ -1921,43 +1921,59 @@
     </object>
   </object>
   <object name="asian bra">
+    <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>Asian girl's bra</alias>
     <descprefix>You are pressed against</descprefix>
-    <description><![CDATA[<br/>The plush cup envelops you, forcing your body against a mountain of creamy tit flesh. The girl's heartbeat thrums through the soft skin. You could try to {object:struggle} or {object:stay still}.]]></description>
-    <enter type="script">
-      this.strugglecount = 0
-    </enter>
-    <staystill type="script"><![CDATA[
-      msg ("You decide not to struggle, letting her silky skin engulf you while she goes about paying for her order. Every subtle movement of her chest rocks you gently and the bass of her heartbeat vibrates through your entire body, drowning out the noise of the restaurant.")
-      SetTimeout (5) {
-        msg ("<br/>Still humming cheerfully to herself, she strolls out the door with you trapped in the humid confines of her bra. Each graceful step makes your prison jiggle and sway as she heads home, blissfully unaware of your silent pleas.")
-        wait {
-          ClearScreen
-          MoveObject (player, asian house)
-        }
-      }
-    ]]></staystill>
-    <struggle type="script"><![CDATA[
-      if (not HasAttribute(this, "strugglecount")) {
+    <description><![CDATA[<br/>The plush cup envelops you, forcing your body against a mountain of creamy tit flesh. The girl's heartbeat thrums through the soft skin. You could try to struggle or stay still.]]></description>
+    <object name="asian breast">
+      <alias>breast</alias>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <descprefix>You are mashed against</descprefix>
+      <enter type="script">
         this.strugglecount = 0
-      }
-      this.strugglecount = this.strugglecount + 1
-      if (this.strugglecount = 1) {
-        msg ("Your frantic squirming only makes the girl laugh. With a mischievous grin she gives her boob a playful squeeze, burying you deeper into her soft flesh and knocking the breath from your lungs.")
-      }
-      elseif (this.strugglecount = 2) {
-        msg ("Another casual squeeze forces you lower in the cup, your tiny form gliding across the slick skin until your face bumps into her swelling nipple. The immense nub seems to throb in response to your struggles.")
-        wait {
-          ClearScreen
-          MoveObject (player, asian nipple)
+      </enter>
+      <staystill type="script"><![CDATA[
+        msg ("You decide not to struggle, letting her silky skin engulf you while she goes about paying for her order. Every subtle movement of her chest rocks you gently and the bass of her heartbeat vibrates through your entire body, drowning out the noise of the restaurant.")
+        SetTimeout (5) {
+          msg ("<br/>Still humming cheerfully to herself, she strolls out the door with you trapped in the humid confines of her bra. Each graceful step makes your prison jiggle and sway as she heads home, blissfully unaware of your silent pleas.")
+          wait {
+            ClearScreen
+            MoveObject (player, asian house)
+          }
         }
-      }
-    ]]></struggle>
+      ]]></staystill>
+      <struggle type="script"><![CDATA[
+        if (not HasAttribute(this, "strugglecount")) {
+          this.strugglecount = 0
+        }
+        this.strugglecount = this.strugglecount + 1
+        if (this.strugglecount = 1) {
+          msg ("Your frantic squirming only makes the girl laugh. With a mischievous grin she gives her boob a playful squeeze, burying you deeper into her soft flesh and knocking the breath from your lungs.")
+        }
+        elseif (this.strugglecount = 2) {
+          msg ("Another casual squeeze forces you lower in the cup, your tiny form gliding across the slick skin until your face bumps into her swelling nipple. The immense nub seems to throb in response to your struggles.")
+          wait {
+            ClearScreen
+            MoveObject (player, asian nipple room)
+          }
+        }
+      ]]></struggle>
+    </object>
+  </object>
+  <object name="asian nipple room">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Asian girl's nipple</alias>
+    <descprefix>You are pinned against</descprefix>
+    <description><![CDATA[<br/>The smothering bra presses you into the vast nub of flesh. Moist heat surrounds you, and every subtle twitch of her chest shifts the nipple threateningly.]]></description>
+    <enter type="script">
+      asian nipple.stage = 0
+      EnableTimer (asian nipple crush)
+    </enter>
     <object name="asian nipple">
       <alias>nipple</alias>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
-      <descprefix>You are pinned against her</descprefix>
       <look type="script"><![CDATA[
         if (not HasAttribute(this, "stage")) {
           this.stage = 0
@@ -1978,10 +1994,6 @@
           msg ("The nipple is now fully hardened, an unstoppable wall of flesh poised to grind you into paste with the slightest movement.")
         }
       ]]></look>
-      <enter type="script">
-        this.stage = 0
-        EnableTimer (asian nipple crush)
-      </enter>
       <struggle type="script"><![CDATA[
         if (not HasAttribute(this, "struggles")) {
           this.struggles = 0
@@ -2055,7 +2067,7 @@
     </object>
     <object name="asian girl">
       <alias>Asian girl</alias>
-      <look><![CDATA[The petite Asian woman is undeniably cute. A short skirt shows off her creamy thighs and she hums to herself while waiting for her order.]]></look>
+      <look><![CDATA[The petite Asian woman is undeniably cute. Her silky black hair frames a round, friendly face and her dark eyes sparkle with curiosity. A short skirt shows off her creamy thighs as she idly scrolls through her phone, humming a happy tune while she waits for her order.]]></look>
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
