@@ -1,0 +1,200 @@
+<!--Saved by Quest 5.8.6836.13983-->
+<asl version="580">
+  <include ref="English.aslx" />
+  <include ref="Core.aslx" />
+  <game name="Shrunk at the Maid Cafe">
+    <gameid>11111111-2222-3333-4444-555555555555</gameid>
+    <version>0.1</version>
+    <firstpublished>2024</firstpublished>
+    <author>boons123</author>
+    <description><![CDATA[You came to enjoy a relaxing break at a maid cafe in Tokyo, but the Spontaneous Shrinking Virus strikes without warning. Now you're tiny and the maids bustle around, unaware of the customer lost among the crumbs.]]></description>
+    <turnoffplacesandobjects type="boolean">false</turnoffplacesandobjects>
+    <autodisplayverbs />
+  </game>
+
+  <object name="table top">
+    <isroom />
+    <descprefix>You are on</descprefix>
+    <description><![CDATA[<br/>The polished wood of the table stretches for what feels like miles. A towering teacup looms nearby and plates of treats dwarf you. The maid who was serving you continues working, unaware that her customer has vanished from sight. Maybe you could get the {object:maid}'s attention or hide in the {object:teacup}. The edge of the table leads down to the {object:cafe floor}.]]></description>
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <beforefirstenter type="script"><![CDATA[
+      msg ("A sudden bout of dizziness hits you. Before you can call for help, the world balloons outward. You've shrunk to a fraction of your former size!\n")
+    ]]></beforefirstenter>
+    <object name="teacup">
+      <look>The cup of tea you ordered now looks like a gigantic porcelain pool.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbin type="script"><![CDATA[
+        msg ("You clamber up the smooth side of the cup and tumble inside.")
+        wait {
+          ClearScreen
+          MoveObject (player, inside teacup)
+        }
+      ]]></climbin>
+    </object>
+    <object name="maid">
+      <look>Your waitress, dressed in a frilly black and white uniform, bustles between tables.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Call</value>
+        <value>Jump up and down</value>
+      </displayverbs>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <call type="script"><![CDATA[
+        msg ("You yell up at the maid, but your voice is tiny over the cafe chatter.")
+      ]]></call>
+      <jumpupanddown type="script"><![CDATA[
+        msg ("You jump and wave wildly. For a moment it looks like she notices, but she simply sweeps some crumbs off the table, nearly brushing you off as well.")
+      ]]></jumpupanddown>
+      <jumpto type="script"><![CDATA[
+        msg ("You make a running leap toward her apron.")
+        wait {
+          ClearScreen
+          MoveObject (player, maid apron)
+        }
+      ]]></jumpto>
+    </object>
+    <object name="cafe floor">
+      <look>The floor far below is dotted with legs and scurrying customers.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbdown type="script"><![CDATA[
+        msg ("Carefully you lower yourself over the side of the table and descend toward the floor.")
+        wait {
+          ClearScreen
+          MoveObject (player, cafe floor room)
+        }
+      ]]></climbdown>
+    </object>
+    <object name="player">
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+    </object>
+  </object>
+
+  <verb>
+    <property>climbin</property>
+    <pattern>climb in</pattern>
+    <defaultexpression>"You can't climb in " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>climbdown</property>
+    <pattern>climb down</pattern>
+    <defaultexpression>"You can't climb down " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>call</property>
+    <pattern>call</pattern>
+    <defaultexpression>"You can't call " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>jumpupanddown</property>
+    <pattern>jump up and down</pattern>
+    <defaultexpression>"You can't jump up and down " + object.article + "."</defaultexpression>
+  </verb>
+
+  <object name="inside teacup">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are in</descprefix>
+    <description><![CDATA[<br/>Warm liquid surrounds you like a sweet-smelling ocean. You might be able to climb back {object:out of the cup}.]]></description>
+    <object name="out of the cup">
+      <look>The rim of the cup towers above.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbout type="script"><![CDATA[
+        msg ("You scramble back up the slick side of the cup to the table.")
+        wait {
+          ClearScreen
+          MoveObject (player, table top)
+        }
+      ]]></climbout>
+    </object>
+  </object>
+  <verb>
+    <property>climbout</property>
+    <pattern>climb out</pattern>
+    <defaultexpression>"You can't climb out " + object.article + "."</defaultexpression>
+  </verb>
+
+  <object name="maid apron">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are clinging to</descprefix>
+    <description><![CDATA[<br/>The crisp apron sways with the maid's movements. From here you can see the floor rushing by far beneath your dangling feet.]]></description>
+    <object name="jump down">
+      <look>The drop to the floor looks daunting but survivable.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbdown type="script"><![CDATA[
+        msg ("You let go and plunge toward the floor, landing with a thump on the polished tile.")
+        wait {
+          ClearScreen
+          MoveObject (player, cafe floor room)
+        }
+      ]]></climbdown>
+    </object>
+  </object>
+
+  <object name="cafe floor room">
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>cafe floor</alias>
+    <descprefix>You are on</descprefix>
+    <description><![CDATA[<br/>Tables tower like buildings all around. Shoes thud across the vast floor, and you spot the {object:maid} moving briskly between customers. You could try climbing a {object:chair leg} or attempt to get the maid's attention again from down here.]]></description>
+    <object name="chair leg">
+      <look>One of the wooden chair legs near you.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climb type="script"><![CDATA[
+        msg ("You start scaling the chair leg, using small grooves for handholds.")
+        wait {
+          ClearScreen
+          MoveObject (player, chair seat)
+        }
+      ]]></climb>
+    </object>
+  </object>
+  <verb>
+    <property>climb</property>
+    <pattern>climb</pattern>
+    <defaultexpression>"You can't climb " + object.article + "."</defaultexpression>
+  </verb>
+
+  <object name="chair seat">
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are on</descprefix>
+    <description><![CDATA[<br/>The fabric cushion feels like a bouncy field beneath you. From here you can see onto the table again or drop back to the {object:cafe floor}.]]></description>
+    <object name="return to floor">
+      <look>The floor is far below.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbdown type="script"><![CDATA[
+        msg ("You carefully slide back down to the floor.")
+        wait {
+          ClearScreen
+          MoveObject (player, cafe floor room)
+        }
+      ]]></climbdown>
+    </object>
+    <object name="back to table">
+      <look>The table surface is close enough to leap toward.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <jumpto type="script"><![CDATA[
+        msg ("You leap toward the table, grabbing onto the edge.")
+        wait {
+          ClearScreen
+          MoveObject (player, table top)
+        }
+      ]]></jumpto>
+    </object>
+  </object>
+</asl>
