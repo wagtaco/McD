@@ -985,6 +985,11 @@
     <pattern>jump up and down</pattern>
     <defaultexpression>"You can't jump up and down " + object.article + "."</defaultexpression>
   </verb>
+  <verb>
+    <property>shout</property>
+    <pattern>shout</pattern>
+    <defaultexpression>"You can't shout " + object.article + "."</defaultexpression>
+  </verb>
   <object name="fries">
     <description><![CDATA[<br/>You cling to a fry, feeling the bag being shaken around as it's carried around across the kitchen.<br/><br/>The busy noises of the kitchen are deafening.  The bag is dropped, and you hear ice being dispensed, before the soda machine begins running. The giantess above you begins taking an order, and you realize that you're being served through the drive thru.<br/><br/>It's just a matter of time before you're served with the {object:fries}.]]></description>
     <descprefix>You are in an order of</descprefix>
@@ -1709,9 +1714,26 @@
       <look>Now giant, the petite Latina isn't so small anymore.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
+        <value>Shout</value>
       </displayverbs>
       <alias>Maria</alias>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <shout type="script"><![CDATA[
+        msg ("You shout up at Maria, your tiny voice barely carrying past the noise of the restaurant.")
+        SetTimeout (3) {
+          msg ("<br/>Her brown eyes flick down and widen when they finally spot your speck-sized form. With a playful grin, she crouches to pluck you from the floor.")
+          SetTimeout (5) {
+            msg ("<br/>Warm fingers curl around you as she brings you to her lips. \"You're kind of cute,\" she whispers before tugging open her shirt and dropping you straight into her deep cleavage.")
+            SetTimeout (5) {
+              msg ("<br/>Her boobs mash around you as she stands back up, the humid pocket of flesh smothering you while she returns to work like nothing happened.")
+              wait {
+                ClearScreen
+                MoveObject (player, cashier cleavage)
+              }
+            }
+          }
+        }
+      ]]></shout>
       <approach type="script">
         msg ("You stare in awe at Maria's size as you walk towards her.")
         wait {
@@ -1874,6 +1896,28 @@
       <struggle>You'd like to struggle, but there's seriously no use. You have no hope.</struggle>
       <lick>You run your tongue across her tan ass fat, tasting the salty skin.</lick>
       <smell>Smells like the fruity body wash she must use, with a trace of sweat.</smell>
+    </object>
+  </object>
+  <object name="cashier cleavage">
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>Maria's cleavage</alias>
+    <descprefix>You are wedged in</descprefix>
+    <objectslistprefix>You can feel</objectslistprefix>
+    <description><![CDATA[<br/>Maria's breasts engulf you completely, burying you in a sweltering world of soft flesh.<br/><br/>Every breath tastes of her sweat and perfume, the heavy mounds squeezing tighter with each motion. All you can see is {object:boobs}.]]></description>
+    <enter type="script">
+      EnableTimer (cashier cleavage suffocation)
+    </enter>
+    <object name="boobs">
+      <alias>boobs</alias>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <prefix>her</prefix>
+      <look>Dark, sweaty titflesh surrounds you on all sides.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <struggle>Your squirming only makes her chest bounce, mashing you deeper.</struggle>
+      <lick>You taste salty skin as you lick desperately at the smothering flesh.</lick>
+      <smell>A mix of vanilla perfume and sweat overwhelms you.</smell>
     </object>
   </object>
   <object name="restaurant floor1">
@@ -9068,6 +9112,22 @@
           msg ("<br/>You wriggle and thrash against Maria's ass cheeks, using the last of your energy worming around in her planet-sized rear. Unfortunately for you, your action's have served absolutely no purpose, with you wasting your breath on actions that only moved to deeper in the giant cashier's crack. Eventually your movements cease, and there's no air left to breathe.<br/><br/>You sit in silence as you realize that these will be your last moment's, trapped inside your coworker's huge ass.")
           SetTimeout (3) {
             msg ("<br/>Your mind fades into oblivion as you pass out from the lack of air, her ass crack now having completely claimed you as it's own. Your death was kind of pathetic honestly. She didn't even do anything, her ass was just powerful enough to kill you.<br/><br/>As she begins to make the smallest movement, some of your tiny bones break and your corpse gets mangled by the movement of the Latina's gargantuan behind. You should be glad you weren't alive for that. With every small movement, her butt slowly pounds your puny body into submission, and you slowly lose all resemblance to a human. By the end of her shift, you're basically a piece of butt lint lodged somewhere in her crack, beaten and broken by the swaying and jiggling of Maria's big butt. <br/><br/>You don't even get the honor of your final resting place being between her cheeks; when she hit the shower after her shift, you were simply washed down the drain as she spread them.")
+            finish
+          }
+        }
+      }
+    ]]></script>
+  </timer>
+  <timer name="cashier cleavage suffocation">
+    <interval>20</interval>
+    <script><![CDATA[
+      msg ("<br/>Maria's cleavage clenches around you, trapping you in sweltering darkness as she continues taking orders.")
+      SetTimeout (5) {
+        msg ("<br/>Sweat trickles over your body while her every movement grinds you deeper between the huge mounds of flesh.")
+        SetTimeout (5) {
+          msg ("<br/>You gasp for air but breathe in only her salty skin, your struggles growing weaker as the heavy tits compress you mercilessly.")
+          SetTimeout (5) {
+            msg ("<br/>Maria laughs at something a customer says, her chest squeezing tight enough to crush the last breath from your body. She never notices when you go limp in her cleavage.")
             finish
           }
         }
