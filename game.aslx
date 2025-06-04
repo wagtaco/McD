@@ -1920,88 +1920,6 @@
       <smell>A mix of vanilla perfume and sweat overwhelms you.</smell>
     </object>
   </object>
-  <object name="asian bra">
-    <usedefaultprefix type="boolean">false</usedefaultprefix>
-    <alias>Asian girl's bra</alias>
-    <descprefix>You are pressed against</descprefix>
-    <description><![CDATA[<br/>The plush cup envelops you, forcing your body against a mountain of creamy tit flesh. The girl's heartbeat thrums through the soft skin. You could try to {object:struggle} or {object:stay still}.]]></description>
-    <enter type="script">
-      this.strugglecount = 0
-    </enter>
-    <staystill type="script"><![CDATA[
-      msg ("You decide not to struggle, letting her silky skin engulf you while she goes about paying for her order. Every subtle movement of her chest rocks you gently and the bass of her heartbeat vibrates through your entire body, drowning out the noise of the restaurant.")
-      SetTimeout (5) {
-        msg ("<br/>Still humming cheerfully to herself, she strolls out the door with you trapped in the humid confines of her bra. Each graceful step makes your prison jiggle and sway as she heads home, blissfully unaware of your silent pleas.")
-        wait {
-          ClearScreen
-          MoveObject (player, asian house)
-        }
-      }
-    ]]></staystill>
-    <struggle type="script"><![CDATA[
-      if (not HasAttribute(this, "strugglecount")) {
-        this.strugglecount = 0
-      }
-      this.strugglecount = this.strugglecount + 1
-      if (this.strugglecount = 1) {
-        msg ("Your frantic squirming only makes the girl laugh. With a mischievous grin she gives her boob a playful squeeze, burying you deeper into her soft flesh and knocking the breath from your lungs.")
-      }
-      elseif (this.strugglecount = 2) {
-        msg ("Another casual squeeze forces you lower in the cup, your tiny form gliding across the slick skin until your face bumps into her swelling nipple. The immense nub seems to throb in response to your struggles.")
-        wait {
-          ClearScreen
-          MoveObject (player, asian nipple)
-        }
-      }
-    ]]></struggle>
-    <object name="asian nipple">
-      <alias>nipple</alias>
-      <usedefaultprefix type="boolean">false</usedefaultprefix>
-      <descprefix>You are pinned against her</descprefix>
-      <look type="script"><![CDATA[
-        if (not HasAttribute(this, "stage")) {
-          this.stage = 0
-        }
-        if (this.stage = 0) {
-          msg ("Her nipple looms before you, soft and plush yet enormous enough to smother your entire body. The faint scent of her skin mixes with fabric softener as you sink against the yielding flesh.")
-        }
-        elseif (this.stage = 1) {
-          msg ("A deep throb courses through the tit as the nipple begins to stiffen, pressing more insistently against your tiny frame and pushing the air from your chest.")
-        }
-        elseif (this.stage = 2) {
-          msg ("It's growing firmer by the second. The skin grows hot and slick with sweat, grinding you between her swelling nub and the bra's fabric.")
-        }
-        elseif (this.stage = 3) {
-          msg ("The nipple approaches rock hardness, the unyielding flesh squeezing painfully around you. Every beat of her heart sends a pulse through the immense mound.")
-        }
-        else {
-          msg ("The nipple is now fully hardened, an unstoppable wall of flesh poised to grind you into paste with the slightest movement.")
-        }
-      ]]></look>
-      <enter type="script">
-        this.stage = 0
-        EnableTimer (asian nipple crush)
-      </enter>
-      <struggle type="script"><![CDATA[
-        if (not HasAttribute(this, "struggles")) {
-          this.struggles = 0
-        }
-        this.struggles = this.struggles + 1
-        if (this.struggles = 1) {
-          this.stage = this.stage + 1
-          msg ("Your desperate kicks and punches seem to excite the sensitive nub. It swells noticeably, pressing you even tighter against the heaving breast.")
-        }
-        elseif (this.struggles = 2) {
-          this.stage = this.stage + 1
-          msg ("You keep fighting and the nipple responds by hardening further, bruising your tiny body as it rubs you mercilessly against the damp bra fabric.")
-        }
-        else {
-          msg ("The swollen nipple pulses violently around you and with one unstoppable throb it flattens you completely, your remains smeared into the sweaty skin.")
-          finish
-        }
-      ]]></struggle>
-    </object>
-  </object>
   <object name="restaurant floor1">
     <alias>restaurant floor</alias>
     <usedefaultprefix type="boolean">false</usedefaultprefix>
@@ -2052,26 +1970,6 @@
           MoveObject (player, MILF heels)
         }
       </approach>
-    </object>
-    <object name="asian girl">
-      <alias>Asian girl</alias>
-      <look><![CDATA[The petite Asian woman is undeniably cute. A short skirt shows off her creamy thighs and she hums to herself while waiting for her order.]]></look>
-      <displayverbs type="stringlist">
-        <value>Look at</value>
-      </displayverbs>
-      <approach type="script"><![CDATA[
-        msg ("You sprint across the filthy tiles, weaving around scattered fries and trash as you make a beeline for the towering girl. Every booming step she takes sends tremors through your tiny body, but you somehow manage to keep your footing until you're standing right beside one of her sneakers.")
-        SetTimeout (3) {
-          msg ("<br/>Her eyes widen in delight as she spots you. The young woman bends down with a beaming smile, her delicate fingers descending upon you like playful claws. \"Aw, you're so cute!\" she giggles, effortlessly pinching your tiny body between her manicured nails.")
-          SetTimeout (3) {
-            msg ("<br/>Instead of helping, she tugs open the neckline of her top with her free hand. A wave of warm, jasmine-scented air washes over you as she slips you into the pillowy cup of her bra, trapping you face-first against a supple mound of flesh. The soft skin moulds around your body, and her casual laughter echoes around you as the world goes dark.")
-            wait {
-              ClearScreen
-              MoveObject (player, asian bra)
-            }
-          }
-        }
-      ]]></approach>
     </object>
   </object>
   <object name="serving counter">
@@ -2231,11 +2129,6 @@
     <pattern>scream at</pattern>
     <defaultexpression>"You can't scream at " + object.article + "."</defaultexpression>
   </verb>
-  <verb>
-    <property>staystill</property>
-    <pattern>stay still</pattern>
-    <defaultexpression>"You can't stay still " + object.article + "."</defaultexpression>
-  </verb>
   <object name="coffee cup">
     <descprefix>You are submerged in</descprefix>
     <alias>coffee</alias>
@@ -2257,13 +2150,6 @@
       <struggle>You flail around like a helpless bug stuck in the giant woman's drink.</struggle>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
     </object>
-  </object>
-  <object name="asian house">
-    <isroom />
-    <usedefaultprefix type="boolean">false</usedefaultprefix>
-    <descprefix>You are inside</descprefix>
-    <alias>Asian girl's house</alias>
-    <description><![CDATA[<br/>The young woman carries you into her neat home, oblivious to your tiny struggles. The air is scented with jasmine and you feel each step she takes through the spacious rooms.<br/><br/>You're along for the ride until she decides what to do with you.]]></description>
   </object>
   <object name="MILF stomach">
     <description><![CDATA[<br/>You land in the disgusting organ with a splash.<br/><br/>Immediately, the sticky digested mess of whatever she already ate for breakfast coats your skin. Your body begins to burn more than it already is, and the MILF's stomach bile begins to eat away at your destroyed skin. Attempting to stay afloat in the rancid vomit, you cry out in pain.<br/><br/>All you can feel is the {object:chyme}.]]></description>
@@ -9347,29 +9233,6 @@
           SetTimeout (3) {
             msg ("<br/>You get sucked into the depths of the toilet, smashing your brains out against the stained porcelain and killing you instantly, before being dragged further into the pipes with Chloe's piss.<br/><br/>Up above, your former coworker finishes washing her hands, having a little giggle about the bug she flicked into the toilet bowl, completely unaware it was her shrunken coworker begging for help.<br/><br/>\"Served it right.\"<br/><br/>She'd notice your disappearance later on in her shift, unaware of her role in your murder. She was only pissed you increased her workload.")
             finish
-          }
-        }
-      }
-    ]]></script>
-  </timer>
-  <timer name="asian nipple crush">
-    <interval>20</interval>
-    <script><![CDATA[
-      msg ("<br/>The soft nipple twitches beneath you, its warm flesh slowly swelling and forcing you to conform to its shape.")
-      asian nipple.stage = 1
-      SetTimeout (5) {
-        msg ("<br/>A wave of heat radiates from the tit as the nipple stiffens even more, leaving you slick with sweat and fear.")
-        asian nipple.stage = 2
-        SetTimeout (5) {
-          msg ("<br/>The pressure intensifies as the giant nub swells around your body, pinning your arms painfully against your sides.")
-          asian nipple.stage = 3
-          SetTimeout (5) {
-            msg ("<br/>It's nearly rock hard now, compressing you so tightly that each breath is a wheezing struggle.")
-            asian nipple.stage = 4
-            SetTimeout (5) {
-              msg ("<br/>With a final earth-shaking pulse, the nipple becomes diamond hard and crushes you utterly, grinding your minuscule body into a smear of gore.")
-              finish
-            }
           }
         }
       }
