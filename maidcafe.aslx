@@ -88,6 +88,85 @@
       </displayverbs>
     </object>
   </object>
+  <object name="pink patron shoe">
+    <descprefix>You are on her</descprefix>
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <alias>pink patron's sneaker</alias>
+    <look>The sneaker looms like a massive slope of white fabric, scuffed from countless walks.</look>
+    <description><![CDATA[<br/>You cling to the side of the patron's sneaker. Far above, her leg stretches up to the hem of her jean shorts. You could climb her {object:leg} or drop back to the {object:cafe floor}.]]></description>
+    <object name="leg">
+      <look>The smooth column of her leg rises toward the chair.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climb type="script"><![CDATA[
+        msg ("You begin your ascent up her leg, using the fine hairs for grip.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("<br/>She casually crosses her legs, scraping you off and sending you plummeting to the ground.")
+            finish
+          }
+          else {
+            ClearScreen
+            MoveObject (player, pink patron lap)
+          }
+        }
+      ]]></climb>
+    </object>
+    <object name="return to floor">
+      <look>The floor is a dizzying drop below.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbdown type="script"><![CDATA[
+        msg ("You carefully climb back down the sneaker.")
+        wait {
+          ClearScreen
+          MoveObject (player, cafe floor room)
+        }
+      ]]></climbdown>
+    </object>
+  </object>
+
+  <object name="pink patron lap">
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are on</descprefix>
+    <alias>the patron's lap</alias>
+    <look>The denim stretches beneath you as she shifts, the fabric wrinkling like rolling hills.</look>
+    <description><![CDATA[<br/>Her jean shorts form a vast plain underfoot. She fidgets from time to time, absorbed in her phone. You could try for the {object:table leg} or slide back down her {object:leg}.]]></description>
+    <object name="table leg">
+      <look>The nearby table leg towers beside her seat.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climb type="script"><![CDATA[
+        msg ("You sprint toward the leg for safety.")
+        wait {
+          msg ("<br/>Her sudden shift flings you from her lap, and you slam into the hard floor below.")
+          finish
+        }
+      ]]></climb>
+    </object>
+    <object name="leg">
+      <look>Her thigh slopes downward toward the floor.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <climbdown type="script"><![CDATA[
+        msg ("You slide down her leg, trying to keep your footing.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("<br/>An absentminded brush of her hand smashes you against her thigh.")
+            finish
+          }
+          else {
+            ClearScreen
+            MoveObject (player, cafe floor room)
+          }
+        }
+      ]]></climbdown>
+    </object>
+  </object>
 
   <verb>
     <property>climbin</property>
@@ -264,6 +343,25 @@
         wait {
           ClearScreen
           MoveObject (player, chair seat)
+        }
+      ]]></climb>
+    </object>
+    <object name="pink patron">
+      <look>A stylish young woman with vibrant pink hair relaxes at a nearby table. She wears jean shorts and idly taps on her phone, oblivious to anything at floor level.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Call</value>
+        <value>Climb</value>
+      </displayverbs>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <call type="script"><![CDATA[
+        msg ("You shout up at the patron, but your tiny voice is swallowed by the chatter of the cafe.")
+      ]]></call>
+      <climb type="script"><![CDATA[
+        msg ("You grab hold of her sneaker and start climbing, hoping she'll notice.")
+        wait {
+          ClearScreen
+          MoveObject (player, pink patron shoe)
         }
       ]]></climb>
     </object>
