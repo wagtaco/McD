@@ -248,8 +248,8 @@
           MoveObject (player, chair seat)
         }
       </climb>
-      </object>
-      <object name="hiker">
+    </object>
+    <object name="hiker">
       <look>The sweaty hiker looms above, a cheerful brunette with glasses and a shining septum ring. Tight shorts cling to her sculpted backside, and her thin tank top does nothing to hide perky breasts and hard nipples. From down here she looks unbelievably huge.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
@@ -276,72 +276,39 @@
           }
         }
       ]]></jumpupanddown>
-      </object>
-      <object name="toward counter">
-        <look>The bustling counter lies across the shiny tiles, an empty stool looming invitingly.</look>
-        <displayverbs type="stringlist">
-          <value>Look at</value>
-        </displayverbs>
-        <jumpto type="script">
-          msg ("You hurry toward the counter, dodging enormous shoes along the way.")
-          wait {
-            ClearScreen
-            MoveObject (player, counter walkway)
-          }
-        </jumpto>
-      </object>
-      <object name="toward booth">
-        <look>A cozy booth sits nearby, its padded seat rising like a soft cliff.</look>
-        <displayverbs type="stringlist">
-          <value>Look at</value>
-        </displayverbs>
-        <jumpto type="script">
-          msg ("You make your way toward the inviting booth.")
-          wait {
-            ClearScreen
-            MoveObject (player, booth corner)
-          }
-        </jumpto>
-      </object>
     </object>
-    <object name="futa maid">
-      <look>The petite maid flits between tables, her frilly skirt swirling past your tiny form. From down here she appears as proper as the others, though the front of her apron bulges in a way you can't quite explain.</look>
-      <description><![CDATA[<br/>Her face beams with cheerful energy as she serves customers. At your size you can't help noticing how the fabric of her apron strains near her thighs. Something about her movements seems oddly careful, as if she's hiding a secret.]]></description>
+    <object name="toward counter">
+      <look>The bustling counter lies across the shiny tiles, an empty stool looming invitingly.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
-        <value>Call</value>
-        <value>Jump up and down</value>
       </displayverbs>
-      <usedefaultprefix type="boolean">false</usedefaultprefix>
-      <call type="script">
-        msg ("You call up, but the clatter of dishes drowns out your voice.")
-      </call>
-      <jumpupanddown type="script"><![CDATA[
-        msg ("You jump and wave desperately at the towering maid.")
+      <jumpto type="script">
+        msg ("You hurry toward the counter, dodging enormous shoes along the way.")
         wait {
-          if (RandomChance(50)) {
-            msg ("She blinks down at you in disbelief, then smiles widely. \"Oh my, a tiny customer!\" she whispers.")
-            msg ("<br/>Cupping you carefully, she rushes toward the staff bathroom. The door clicks locked as she steps inside.")
-            msg ("She sets you on the counter a moment, licking her lips in anticipation.")
-            msg ("Her fingers tease the waistband of her underwear, revealing a glimpse of flushed skin you weren't expecting.")
-            msg ("With a sly grin she pulls open her panties and drops you against something warm and oddly smooth. \"Enjoy the view, little one,\" she giggles.")
-            wait {
-              ClearScreen
-              MoveObject (player, futa panties)
-            }
-          }
-          else {
-            msg ("She turns away before noticing you.")
-          }
+          ClearScreen
+          MoveObject (player, counter walkway)
         }
-      ]]></jumpupanddown>
-      <object name="under skirt">
-        <look>Peering up beneath her skirt reveals a shadowed bulge pressing against silky panties. Whatever it is, it's enormous.</look>
-        <displayverbs type="stringlist">
-          <value>Look at</value>
-        </displayverbs>
-      </object>
+      </jumpto>
     </object>
+    <object name="toward booth">
+      <look>A cozy booth sits nearby, its padded seat rising like a soft cliff.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+      <jumpto type="script">
+        msg ("You make your way toward the inviting booth.")
+        wait {
+          ClearScreen
+          MoveObject (player, booth corner)
+        }
+      </jumpto>
+    </object>
+    <exit alias="east" to="booth corner">
+      <inherit name="eastdirection" />
+    </exit>
+    <exit alias="west" to="counter walkway">
+      <inherit name="westdirection" />
+    </exit>
   </object>
   <verb>
     <property>climb</property>
@@ -462,14 +429,14 @@
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are pressed against</descprefix>
-  <alias>futa maid's panties</alias>
-  <look>The dark space is humid and close. A tremendous shaft arches above you while two heavy balls crowd below, all barely held back by thin fabric.</look>
-  <beforefirstenter type="script">
-    msg ("The panties snap shut above you, trapping you in oppressive heat.")
-    msg ("The maid's body scent fills your lungs as the world shakes with her steps.")
-    msg ("Somehow you have ended up in the very front of her underwear, face to face with her monstrous package.")
-  </beforefirstenter>
-  <description><![CDATA[<br/>The maid's underwear squeezes you against her surprising anatomy. Each slow step she takes makes the monstrous {object:shaft} shift and the swollen {object:balls} jostle. High above, the {object:cock head} watches over you like a fleshy moon. There is no escape from this steamy prison.]]></description>
+    <alias>futa maid's panties</alias>
+    <look>The dark space is humid and close. A tremendous shaft arches above you while two heavy balls crowd below, all barely held back by thin fabric.</look>
+    <description><![CDATA[<br/>The maid's underwear squeezes you against her surprising anatomy. Each slow step she takes makes the monstrous {object:shaft} shift and the swollen {object:balls} jostle. High above, the {object:cock head} watches over you like a fleshy moon. There is no escape from this steamy prison.]]></description>
+    <beforefirstenter type="script">
+      msg ("The panties snap shut above you, trapping you in oppressive heat.")
+      msg ("The maid's body scent fills your lungs as the world shakes with her steps.")
+      msg ("Somehow you have ended up in the very front of her underwear, face to face with her monstrous package.")
+    </beforefirstenter>
     <enter type="script">
       set (player, "head_lick", 0)
       set (player, "head_struggle", 0)
@@ -492,23 +459,23 @@
         set (player, "head_lick", GetInt(player, "head_lick") + 1)
         if (GetInt(player, "head_lick") = 1) {
           msg ("You run your tongue along the enormous glans, drowning in salty heat.")
-          msg ("The surface throbs beneath you, sending quivers through your body.")
-          msg ("A distant sigh of pleasure rumbles from the maid.")
-          msg ("The head twitches but remains mostly soft.")
+          msg ("<br/>The surface throbs beneath you, sending quivers through your body.")
+          msg ("<br/>A distant sigh of pleasure rumbles from the maid.")
+          msg ("<br/>The head twitches but remains mostly soft.")
         }
-        elseif (GetInt(player, "head_lick") = 2) {
-          msg ("You keep licking hungrily, tracing the crown's sensitive rim.")
+        else if (GetInt(player, "head_lick") = 2) {
+          msg ("<br/>You keep licking hungrily, tracing the crown's sensitive rim.")
           wait {
-            msg ("The swollen head bulges, shoving you back against the silky fabric.")
+            msg ("<br/>The swollen head bulges, shoving you back against the silky fabric.")
+            msg ("<br/>Precum beads beside you, perfuming the stifling air.")
+            msg ("<br/>Everything feels hotter by the second.")
           }
-          msg ("Precum beads beside you, perfuming the stifling air.")
-          msg ("Everything feels hotter by the second.")
         }
         else {
           msg ("Your worship proves too much. The cock stiffens violently, crushing you against the cloth.")
-          msg ("Bones snap as the engorged head swells larger than ever.")
-          msg ("Agony flashes before darkness claims you.")
-          msg ("Your tiny frame can't withstand the sudden pressure.")
+          msg ("<br/>Bones snap as the engorged head swells larger than ever.")
+          msg ("<br/>Agony flashes before darkness claims you.")
+          msg ("<br/>Your tiny frame can't withstand the sudden pressure.")
           msg ("<br/><br/><b>GAME OVER: Burst by the futa maid's erection.</b>")
           finish
         }
@@ -524,7 +491,7 @@
           msg ("A faint tremor runs through the soft head.")
           msg ("It stays lazily limp despite your efforts.")
         }
-        elseif (GetInt(player, "head_struggle") = 2) {
+        else if (GetInt(player, "head_struggle") = 2) {
           msg ("Your panicked thrashing slides you downward, sticky precum coating your body.")
           msg ("The space grows darker as you slip under the shaft.")
           msg ("Breath comes harder in the humid air.")
@@ -534,11 +501,11 @@
           msg ("With a final wriggle you wedge fully beneath the heavy cock.")
           wait {
             msg ("Warm skin seals over your face, smothering your tiny body.")
+            msg ("Your struggles weaken until everything fades to black.")
+            msg ("There is nothing but pulsing heat and darkness.")
+            msg ("<br/><br/><b>GAME OVER: Smothered under the futa maid's cock.</b>")
+            finish
           }
-          msg ("Your struggles weaken until everything fades to black.")
-          msg ("There is nothing but pulsing heat and darkness.")
-          msg ("<br/><br/><b>GAME OVER: Smothered under the futa maid's cock.</b>")
-          finish
         }
       ]]></struggle>
     </object>
@@ -560,13 +527,13 @@
           msg ("The flesh stirs slightly at your attention.")
           msg ("It remains soft enough to bend.")
         }
-        elseif (GetInt(player, "shaft_lick") = 2) {
+        else if (GetInt(player, "shaft_lick") = 2) {
           msg ("You lick up a pulsing vein, feeling it swell beneath you.")
           msg ("The entire shaft shifts, beginning to stiffen.")
           wait {
             msg ("A low moan echoes around you as heat floods the cramped space.")
+            msg ("You brace yourself against the expanding flesh.")
           }
-          msg ("You brace yourself against the expanding flesh.")
         }
         else {
           msg ("Your worship forces the shaft fully erect with brutal speed.")
@@ -588,7 +555,7 @@
           msg ("Sweat slicks your hands, making your grip useless.")
           msg ("The shaft stays relaxed for the moment.")
         }
-        elseif (GetInt(player, "shaft_struggle") = 2) {
+        else if (GetInt(player, "shaft_struggle") = 2) {
           msg ("Your struggles slide you beneath the warm column.")
           msg ("The weight settles heavily on your chest.")
           msg ("Breathing becomes a fight in the tight space.")
@@ -598,11 +565,11 @@
           msg ("Pinned under the heavy meat, you can no longer move.")
           wait {
             msg ("The last of your air seeps out as the cock presses flat against you.")
+            msg ("Darkness swallows you as you suffocate.")
+            msg ("Your limbs twitch uselessly beneath the crushing weight.")
+            msg ("<br/><br/><b>GAME OVER: Smothered beneath the shaft.</b>")
+            finish
           }
-          msg ("Darkness swallows you as you suffocate.")
-          msg ("Your limbs twitch uselessly beneath the crushing weight.")
-          msg ("<br/><br/><b>GAME OVER: Smothered beneath the shaft.</b>")
-          finish
         }
       ]]></struggle>
     </object>
@@ -624,13 +591,13 @@
           msg ("The heat radiating from it is incredible.")
           msg ("You hear a soft hum of delight above.")
         }
-        elseif (GetInt(player, "balls_lick") = 2) {
+        else if (GetInt(player, "balls_lick") = 2) {
           msg ("You keep lapping, coaxing the ball tighter against your body.")
           wait {
             msg ("The enormous orb draws upward, churning with need.")
+            msg ("The cramped space grows even hotter.")
+            msg ("You can barely breathe the musky air.")
           }
-          msg ("The cramped space grows even hotter.")
-          msg ("You can barely breathe the musky air.")
         }
         else {
           msg ("The balls tense violently, ramming you against the unyielding shaft.")
@@ -652,7 +619,7 @@
           msg ("Sweat slicks your skin, making escape impossible.")
           msg ("The shaft above droops heavily across your back.")
         }
-        elseif (GetInt(player, "balls_struggle") = 2) {
+        else if (GetInt(player, "balls_struggle") = 2) {
           msg ("Your thrashing slips you into the sweaty fold beneath the shaft.")
           msg ("Hot skin molds around you from all directions.")
           msg ("Each breath burns your lungs with musk.")
@@ -662,17 +629,15 @@
           msg ("Trapped between cock and balls, you can no longer breathe.")
           wait {
             msg ("Your vision darkens as the crushing heat steals your final breath.")
+            msg ("You go limp, unseen and forgotten.")
+            msg ("The enormous orbs grind together, sealing your fate.")
+            msg ("<br/><br/><b>GAME OVER: Suffocated by the maid's balls.</b>")
+            finish
           }
-          msg ("You go limp, unseen and forgotten.")
-          msg ("The enormous orbs grind together, sealing your fate.")
-          msg ("<br/><br/><b>GAME OVER: Suffocated by the maid's balls.</b>")
-          finish
         }
       ]]></struggle>
     </object>
   </object>
-=======
-
   <object name="counter walkway">
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
@@ -680,62 +645,58 @@
     <alias>counter stool</alias>
     <look>The towering counter looms overhead, an empty stool resting beside it.</look>
     <enter type="script"><![CDATA[
-msg ("The stool's cushion towers above, wide and plush like a looming cloud.")
-msg ("You barely register the heavy footsteps behind you.")
-msg ("A massive shadow falls over everything as a plump maid backs toward the seat.")
-msg ("Her striped panties stretch across two wobbling globes of soft flesh.")
-msg ("Each cheek quivers with the tiniest movement, glistening with a sheen of sweat from her shift.")
-wait {
-  ClearScreen
-}
-msg ("You try to scramble away, but your legs tangle in the cloth fibers of the floor.")
-msg ("The gigantic ass descends with terrifying speed, eclipsing your entire world.")
-msg ("Dimples form on the pale expanse as it rushes down, blotting out the light above.")
-msg ("Her weight settles onto the stool with a deep creak, trapping you beneath an avalanche of softness.")
-msg ("Warmth smothers you instantly, the fabric of her panties grinding down onto your helpless body.")
-wait {
-  ClearScreen
-}
-msg ("You let out a muffled scream that vanishes into the yielding flesh of her undercarriage.")
-msg ("Massive cheeks mold around you, compressing until your bones begin to creak.")
-msg ("Every breath is squeezed from your lungs as the heavy backside engulfs you.")
-msg ("You feel your ribs start to bend, pinned flat against the unforgiving stool.")
-msg ("Sweat trickles along the curves above, dripping onto your face like warm rain.")
-wait {
-  ClearScreen
-}
-msg ("Her oblivious humming vibrates through her body, rattling your compressed frame.")
-msg ("Flesh squeezes from every side, a living cushion eager to make you part of the padding.")
-msg ("The pressure builds mercilessly, your tiny form nothing more than a forgotten lump.")
-msg ("Your vision swims with stars as the air finally leaves your crushed chest.")
-msg ("Each second lasts forever, yet the weight only increases as she settles more comfortably.")
-wait {
-  ClearScreen
-}
-msg ("You whimper soundlessly, tears mixing with the salty sheen that coats your prison.")
-msg ("No part of you is free; even your hands are flattened uselessly at your sides.")
-msg ("Her colossal crack yawns above, squeezing together with lazy twitches that grind you thinner.")
-msg ("You think you hear distant chatter from the cafe, but it grows faint as the darkness tightens.")
-msg ("Numbness spreads as your body finally begins to give way under the unstoppable ass.")
-wait {
-  ClearScreen
-}
-msg ("Bones snap softly, muffled by the plush flesh engulfing you.")
-msg ("Pain flares white-hot before fading into a dull throb as everything goes dim.")
-msg ("The last sensation is the overwhelming heat of her body pressing down from all sides.")
-msg ("With a final squelch, you are squashed completely beneath her colossal backside.")
-msg ("A faint stain is all that remains on the underside of her panties.")
-msg ("Her full weight settles, sealing your flattened remains against the cushion.")
-msg ("No one in the bustling cafe notices the tiny smear you've become.")
-msg ("The monstrous cheeks wiggle once more, erasing even that final trace of you.")
-wait {
-  ClearScreen
-}
-msg ("<br/><br/><b>GAME OVER: Obliterated under a maid's gigantic rear.</b>")
-finish
+      msg ("The stool's cushion towers above, wide and plush like a looming cloud.")
+      msg ("You barely register the heavy footsteps behind you.")
+      msg ("A massive shadow falls over everything as a plump maid backs toward the seat.")
+      msg ("Her striped panties stretch across two wobbling globes of soft flesh.")
+      msg ("Each cheek quivers with the tiniest movement, glistening with a sheen of sweat from her shift.")
+      wait {
+        ClearScreen
+        msg ("You try to scramble away, but your legs tangle in the cloth fibers of the floor.")
+        msg ("The gigantic ass descends with terrifying speed, eclipsing your entire world.")
+        msg ("Dimples form on the pale expanse as it rushes down, blotting out the light above.")
+        msg ("Her weight settles onto the stool with a deep creak, trapping you beneath an avalanche of softness.")
+        msg ("Warmth smothers you instantly, the fabric of her panties grinding down onto your helpless body.")
+        wait {
+          ClearScreen
+          msg ("You let out a muffled scream that vanishes into the yielding flesh of her undercarriage.")
+          msg ("Massive cheeks mold around you, compressing until your bones begin to creak.")
+          msg ("Every breath is squeezed from your lungs as the heavy backside engulfs you.")
+          msg ("You feel your ribs start to bend, pinned flat against the unforgiving stool.")
+          msg ("Sweat trickles along the curves above, dripping onto your face like warm rain.")
+          wait {
+            ClearScreen
+            msg ("Her oblivious humming vibrates through her body, rattling your compressed frame.")
+            msg ("Flesh squeezes from every side, a living cushion eager to make you part of the padding.")
+            msg ("The pressure builds mercilessly, your tiny form nothing more than a forgotten lump.")
+            msg ("Your vision swims with stars as the air finally leaves your crushed chest.")
+            msg ("Each second lasts forever, yet the weight only increases as she settles more comfortably.")
+            wait {
+              ClearScreen
+              msg ("You whimper soundlessly, tears mixing with the salty sheen that coats your prison.")
+              msg ("No part of you is free; even your hands are flattened uselessly at your sides.")
+              msg ("Her colossal crack yawns above, squeezing together with lazy twitches that grind you thinner.")
+              msg ("You think you hear distant chatter from the cafe, but it grows faint as the darkness tightens.")
+              msg ("Numbness spreads as your body finally begins to give way under the unstoppable ass.")
+              wait {
+                ClearScreen
+                msg ("Bones snap softly, muffled by the plush flesh engulfing you.")
+                msg ("Pain flares white-hot before fading into a dull throb as everything goes dim.")
+                msg ("The last sensation is the overwhelming heat of her body pressing down from all sides.")
+                msg ("With a final squelch, you are squashed completely beneath her colossal backside.")
+                msg ("A faint stain is all that remains on the underside of her panties.")
+                msg ("Her full weight settles, sealing your flattened remains against the cushion.")
+                msg ("No one in the bustling cafe notices the tiny smear you've become.")
+                msg ("The monstrous cheeks wiggle once more, erasing even that final trace of you.")
+                msg ("<br/><br/><b>GAME OVER: Obliterated under a maid's gigantic rear.</b>")
+                finish
+              }
+            }
+          }
+        }
+      }
     ]]></enter>
   </object>
-
   <object name="booth corner">
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
@@ -744,7 +705,7 @@ finish
     <look>The padded booth rises like a massive couch, the faint scent of vanilla lingering in the fabric.</look>
     <description><![CDATA[
 <br/>The booth's towering seat looms above you. Customers chat loudly all around, oblivious to the minuscule figure exploring the soft cushions. A slight warmth radiates from the padding where one of the maids recently rested.
-    ]]></description>
+        ]]></description>
     <object name="climb seat">
       <look>The cushion curves invitingly upward.</look>
       <displayverbs type="stringlist">
@@ -759,14 +720,54 @@ finish
         }
       </climb>
     </object>
+    <exit alias="west" to="cafe floor room">
+      <inherit name="westdirection" />
+    </exit>
+    <object name="futa maid">
+      <look>The petite maid flits between tables, her frilly skirt swirling past your tiny form. From down here she appears as proper as the others, though the front of her apron bulges in a way you can't quite explain.</look>
+      <description><![CDATA[<br/>Her face beams with cheerful energy as she serves customers. At your size you can't help noticing how the fabric of her apron strains near her thighs. Something about her movements seems oddly careful, as if she's hiding a secret.]]></description>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Call</value>
+        <value>Jump up and down</value>
+      </displayverbs>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <call type="script">
+        msg ("You call up, but the clatter of dishes drowns out your voice.")
+      </call>
+      <jumpupanddown type="script"><![CDATA[
+        msg ("You jump and wave desperately at the towering maid.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("She blinks down at you in disbelief, then smiles widely. \"Oh my, a tiny customer!\" she whispers.")
+            msg ("<br/>Cupping you carefully, she rushes toward the staff bathroom. The door clicks locked as she steps inside.")
+            msg ("She sets you on the counter a moment, licking her lips in anticipation.")
+            msg ("Her fingers tease the waistband of her underwear, revealing a glimpse of flushed skin you weren't expecting.")
+            msg ("With a sly grin she pulls open her panties and drops you against something warm and oddly smooth. \"Enjoy the view, little one,\" she giggles.")
+            wait {
+              ClearScreen
+              MoveObject (player, futa panties)
+            }
+          }
+          else {
+            msg ("She turns away before noticing you.")
+          }
+        }
+      ]]></jumpupanddown>
+      <object name="under skirt">
+        <look>Peering up beneath her skirt reveals a shadowed bulge pressing against silky panties. Whatever it is, it's enormous.</look>
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+        </displayverbs>
+      </object>
+    </object>
   </object>
-
   <object name="cheek prison">
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are wedged within</descprefix>
     <alias>plush cheeks</alias>
-    <look><![CDATA[
+    <look>
 The pillowy cheeks swell on both sides, rising and falling with each oblivious shift of the maid above.
 Moisture beads on every inch of sweltering skin, drenching you in salty dampness.
 Another shift presses the pliant flesh firmly against your face, forcing you to inhale her overwhelming musk.
@@ -779,16 +780,20 @@ No part of the colossal cleft is dry or cool.
 You are forced to curl tightly by the constant pressure.
 Each breath is a struggle as the heavy curves squeeze in.
 Heat radiates from all around, dizzying and relentless.
-]]></look>
-    <enter type="script"><![CDATA[
-msg ("<br/>Soft flesh compresses you from every angle. The maid sat down without noticing your presence, leaving you buried deep between her generous cheeks.")
-msg ("Dim light filters in from far above whenever she shifts, but otherwise you are trapped in sultry gloom.")
-msg ("The air tastes of sweat and faint perfume, making every gasp laborious.")
-set (player, "cheek_stage", 0)
-set (player, "cheek_struggle", 0)
-set (player, "cheek_rub", 0)
-cheekstage.enabled = true
-]]></enter>
+    </look>
+    <enter type="script">
+      msg ("Dim light filters in from far above whenever she shifts, but otherwise you are trapped in sultry gloom.")
+      msg ("The air tastes of sweat and faint perfume, making every gasp laborious.")
+      set (player, "cheek_stage", 0)
+      set (player, "cheek_struggle", 0)
+      set (player, "cheek_rub", 0)
+      cheekstage.enabled = true
+    </enter>
+    <usestandardverblist />
+    <beforeenter type="script"><![CDATA[
+      msg ("Before you can get your bearings, a shadow falls over you. You look up to see an endless expanse of ass, barely contained by lace panties. You are directly under an oblivious maid.")
+      msg ("<br/>Soft flesh compresses you from every angle. The maid sat down without noticing your presence, leaving you buried deep between her generous cheeks.")
+    ]]></beforeenter>
     <object name="cushion walls">
       <look><![CDATA[
 The pillowy cheeks rise on both sides, wobbling with each oblivious shift of the maid above.<br/>
@@ -798,7 +803,7 @@ The air is thick with her musk and the faint hint of perfume.<br/>
 There is no firm surface to push against—only yielding, quivering fat.<br/>
 Droplets slide past your ears and patter onto the cushion far below.<br/>
 Even your breathing is muffled by the overwhelming softness.<br/>
-]]></look>
+      ]]></look>
       <displayverbs type="stringlist">
         <value>Look at</value>
         <value>Struggle</value>
@@ -813,11 +818,6 @@ Even your breathing is muffled by the overwhelming softness.<br/>
           msg ("You push with all your strength, but the sweltering flesh merely bulges around you.")
           msg ("Hot slickness coats your arms as the walls ripple in response.")
           msg ("The maid unknowingly clenches, making your prison even tighter.")
-        }
-        elseif (GetInt(player, "cheek_struggle") = 2) {
-          msg ("You thrash desperately, arms sinking wrist-deep into quivering fat.")
-          msg ("Your efforts only slide you lower along the sweating valley.")
-          msg ("A muffled giggle rumbles overhead as she adjusts her seat, oblivious to your plight.")
         }
         else {
           msg ("You strain until stars burst behind your eyes, but the oppressive flesh refuses to budge.")
@@ -837,11 +837,6 @@ Even your breathing is muffled by the overwhelming softness.<br/>
           msg ("Her cheek shivers at the unexpected touch, squeezing you slightly.")
           msg ("The maid murmurs softly and shifts, inadvertently grinding you deeper.")
         }
-        elseif (GetInt(player, "cheek_rub") = 2) {
-          msg ("You keep massaging desperately. Heat builds as the cushy flesh molds eagerly around you.")
-          msg ("A subconscious moan escapes her lips, and her hips roll ever so slightly.")
-          msg ("The sweltering air grows thicker, leaving you dizzy.")
-        }
         else {
           msg ("Your frantic rubbing finally wakes subconscious desires. She begins to grind her ass in slow circles, trapping you in a dizzying rhythm of flesh.")
           msg ("The movements grow stronger until you're mashed repeatedly from all sides, coated in sweat and lost in steamy darkness.")
@@ -853,7 +848,7 @@ Even your breathing is muffled by the overwhelming softness.<br/>
   </object>
   <turnscript name="cheekstage">
     <enabled type="boolean">false</enabled>
-    <script><![CDATA[
+    <script>
       if (player.parent = cheek prison) {
         if (not HasInt(player, "cheek_stage")) {
           set (player, "cheek_stage", 0)
@@ -869,42 +864,24 @@ Even your breathing is muffled by the overwhelming softness.<br/>
           msg ("The maid's weight pins you deeper with every relaxed sigh.")
           msg ("Your muscles tremble with effort but achieve nothing.")
         }
-        elseif (stage = 1) {
-          msg ("A distant burst of laughter from the cafe feels miles away.")
-          msg ("Her body heat drapes over you like a suffocating blanket.")
-          msg ("No matter how you twist, the heavy flesh molds along your every contour.")
-          msg ("You attempt to call out, but your voice is swallowed by the soft walls.")
-          msg ("Droplets of sweat slide past your ears and drip onto the seat below.")
-          msg ("Time stretches endlessly while you're wedged in the humid valley.")
-          msg ("A fresh wave of warmth engulfs you as she lazily clenches.")
-          msg ("Each breath draws in more of her heady scent, making you light-headed.")
-        }
-        elseif (stage = 2) {
-          msg ("Your skin prickles with heat trapped between the suffocating walls.")
-          msg ("Everything smells overwhelmingly of skin and faint floral perfume.")
-          msg ("You know you should keep fighting, but your limbs feel so heavy.")
-          msg ("The relentless warmth seeps into your bones, draining your strength.")
-          msg ("She sighs contentedly, pressing you deeper as her cheeks relax.")
-          msg ("It's almost like being trapped in a living, smothering pillow.")
-          msg ("Occasional vibrations rumble through her body from the conversation outside.")
-          msg ("You try once more to wedge a hand up, only to have it pinned back instantly.")
-        }
-        elseif (stage = 3) {
-          msg ("There is simply no room to maneuver.")
-          msg ("The sticky softness claims every inch of you without effort.")
-          msg ("Your mind drifts, lulled by the rhythmic squeezing around you.")
-          msg ("An itch along your arm can't be scratched because you can't lift it.")
-          msg ("The constant dampness makes you shiver despite the heat.")
-          msg ("Down here you are nothing but a small toy wedged in a humid prison.")
-          msg ("With every exhale, you feel more light-headed.")
-          msg ("At last you hang limp, gasping shallowly.")
-          cheekstage.enabled = false
+        else {
+          if (stage = 3) {
+            msg ("There is simply no room to maneuver.")
+            msg ("The sticky softness claims every inch of you without effort.")
+            msg ("Your mind drifts, lulled by the rhythmic squeezing around you.")
+            msg ("An itch along your arm can't be scratched because you can't lift it.")
+            msg ("The constant dampness makes you shiver despite the heat.")
+            msg ("Down here you are nothing but a small toy wedged in a humid prison.")
+            msg ("With every exhale, you feel more light-headed.")
+            msg ("At last you hang limp, gasping shallowly.")
+            cheekstage.enabled = false
+          }
         }
         set (player, "cheek_stage", stage + 1)
       }
       else {
         self.enabled = false
       }
-    ]]></script>
+    </script>
   </turnscript>
 </asl>
