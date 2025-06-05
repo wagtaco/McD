@@ -1,0 +1,428 @@
+<!--Saved by Quest 5.8.6836.13983-->
+<asl version="580">
+  <include ref="English.aslx" />
+  <include ref="Core.aslx" />
+  <game name="Aunt Claire's Tiny Photographer">
+    <gameid>88888888-9999-aaaa-bbbb-cccccccccccc</gameid>
+    <version>0.1</version>
+    <firstpublished>2024</firstpublished>
+    <author>boons123</author>
+    <description><![CDATA[You agreed to give your Aunt Claire a confidence boosting photo session using your shrinking belt. One clumsy slip left you inches tall on her living room floor while she excitedly fumbled with her camera. The remote that controls your size sits far away on the dining room table, well out of reach. From this tiny perspective you must survive Claire's playful antics and somehow persuade her to restore you.]]></description>
+    <turnoffplacesandobjects type="boolean">false</turnoffplacesandobjects>
+    <autodisplayverbs />
+  </game>
+  <object name="living room floor">
+    <isroom />
+    <descprefix>You are on</descprefix>
+    <look>The carpet fibers rise around you like thick tree trunks. Far above, Aunt Claire paces about adjusting her tripod, completely unaware of the minuscule photographer gaping up at her.</look>
+    <description><![CDATA[<br/>Every tremor of Claire's slippered feet is an earthquake at your scale. She hums to herself while the bulky camera strap swings over your head like some monstrous pendulum. The remote lies on the far table near her glass of wine, hopelessly out of reach. You could try to {object:call up} or {object:wave frantically} before she crushes you by mistake. The nearby {object:sofa} looks climbable if you want to get a better vantage point.]]></description>
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <beforefirstenter type="script">
+      msg ("Your world lurches violently as the belt's screen flashes. In an instant the familiar living room becomes a sprawling wilderness of carpet. Overhead, Claire's voice booms with carefree excitement.\n")
+    </beforefirstenter>
+    <object name="aunt claire">
+      <look>Claire towers overhead in a patterned sundress, obliviously tapping away at her camera settings.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Call</value>
+        <value>Wave frantically</value>
+      </displayverbs>
+      <call type="script">
+        msg ("You cup your hands and shout her name, but it leaves your throat as a pitiful squeak lost in the cavernous room.")
+      </call>
+      <wavefrantically type="script"><![CDATA[
+        msg ("You jump and wave with desperate energy, hoping Claire notices before a stray step ends your career.")
+        wait {
+          if (RandomChance(40)) {
+            msg ("Her eyes finally drift downward. With a shocked gasp she bends and offers a trembling palm, carefully scooping you up toward the {object:sofa}.")
+            ClearScreen
+            MoveObject (player, sofa)
+          }
+          elseif (RandomChance(10)) {
+            msg ("Instead of noticing you, Claire's foot slams down perilously close, the rush of air nearly bowling you over. Any closer and you'd have been a smear.")
+          }
+          else {
+            msg ("Claire doesn't hear your squeaks. She steps away, the ground shaking violently with each oblivious stride.")
+          }
+        }
+      ]]></wavefrantically>
+    </object>
+    <object name="sofa">
+      <look>The sofa rises like a massive cliff. A loose thread dangles invitingly from the cushion above.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Climb</value>
+      </displayverbs>
+      <climb type="script">
+        msg ("Grasping the frayed thread, you haul yourself up the rough fabric, praying Claire doesn't sit down mid climb.")
+        wait {
+          if (RandomChance(15)) {
+            msg ("Halfway up, Claire sweeps by and flops onto the cushion with a carefree sigh. The impact knocks you loose and her titanic rear end descends toward you. There's no escape.")
+            wait {
+              ClearScreen
+              MoveObject (player, crushed)
+            }
+          }
+          else {
+            ClearScreen
+            MoveObject (player, sofa seat)
+          }
+        }
+      </climb>
+    </object>
+    <object name="player">
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+      </displayverbs>
+    </object>
+  </object>
+  <object name="sofa seat">
+    <isroom />
+    <alias>sofa</alias>
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are on</descprefix>
+    <look>The cushioned surface dips beneath your feet, smelling faintly of fabric softener and Claire's perfume.</look>
+    <description><![CDATA[<br/>From here you can finally peer across the room. Claire's enormous form is an imposing sight as she fiddles with the remote on the table. You might try to {object:get her attention} or attempt to {object:leap to table}. A fall from this height could prove fatal.]]></description>
+    <object name="get her attention">
+      <look>You wave from the cushion.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Wave</value>
+      </displayverbs>
+      <wave type="script">
+        msg ("You wave your arms and shout, finally drawing Claire's startled gaze. She bites her lip with a mix of guilt and fascination before carefully lifting you in her hand and depositing you onto the {object:dining table}.")
+        wait {
+          ClearScreen
+          MoveObject (player, dining table)
+        }
+      </wave>
+    </object>
+    <object name="leap to table">
+      <look>The wooden table stands several body lengths away.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Leap</value>
+      </displayverbs>
+      <leap type="script">
+        msg ("You take a reckless running start and hurl yourself toward the edge, praying for a soft landing.")
+        wait {
+          if (RandomChance(30)) {
+            msg ("Miraculously you land on the table with a painful thud, bruised but alive.")
+            ClearScreen
+            MoveObject (player, dining table)
+          }
+          else {
+            msg ("The jump proves too far. You plummet toward the carpet as Claire turns, unaware. The fall snaps bones and darkness swallows you.")
+            wait {
+              ClearScreen
+              MoveObject (player, dead)
+            }
+          }
+        }
+      </leap>
+    </object>
+  </object>
+  <verb>
+    <property>climb</property>
+    <pattern>climb</pattern>
+    <defaultexpression>"You can't climb " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>wavefrantically</property>
+    <pattern>wave frantically</pattern>
+    <defaultexpression>"You can't wave frantically " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>wave</property>
+    <pattern>wave</pattern>
+    <defaultexpression>"You can't wave " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>leap</property>
+    <pattern>leap</pattern>
+    <defaultexpression>"You can't leap " + object.article + "."</defaultexpression>
+  </verb>
+  <object name="dining table">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are on</descprefix>
+    <look>The polished table stretches before you like an expansive plain. A half eaten cupcake looms nearby, and high above Claire's hungry eyes watch your every move.</look>
+    <description><![CDATA[<br/>Scattered crumbs are boulders at your feet. The remote controlling your size sits near Claire's hand, flashing softly. She keeps it just out of reach while whispering excited commentary about how adorable you look. The {object:cupcake} towers in front of you, frosting glistening. Claire seems eager for you to explore it.]]></description>
+    <object name="cupcake">
+      <look>The vanilla cupcake's white frosting piles high like a sugary mountain.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Climb</value>
+      </displayverbs>
+      <climb type="script">
+        msg ("Claire giggles with delight as you scale the sticky frosting, each step sinking into the soft sweetness. The air swirls with the smell of vanilla and the distant thunder of Claire's excited breathing.")
+        wait {
+          ClearScreen
+          MoveObject (player, on cupcake)
+        }
+      </climb>
+    </object>
+    <object name="continue session">
+      <look>Claire watches you with growing hunger.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Continue</value>
+      </displayverbs>
+      <continue type="script">
+        msg ("Satisfied with your tiny antics on the table, Claire pinches you up and carries you off toward her bedroom, camera in the other hand.")
+        wait {
+          ClearScreen
+          MoveObject (player, bedroom)
+        }
+      </continue>
+    </object>
+  </object>
+  <object name="on cupcake">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are on</descprefix>
+    <look>The frosting landscape clings to you in thick dollops. Claire's enormous face looms overhead, mouth watering as she eyes her living topping.</look>
+    <description><![CDATA[<br/>Claire's hot breath washes over you as she lowers her face for a better look. "You look so cute like that," she teases, licking her lips. Her gleaming teeth part, and you realize she genuinely contemplates tasting you. You can {object:dodge the tongue} or {object:keep taking photos}.]]></description>
+    <object name="dodge the tongue">
+      <look>The monstrous tongue snakes toward you, glistening with saliva.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Dodge</value>
+      </displayverbs>
+      <dodge type="script">
+        msg ("You dive aside as the tongue slurps up a mound of frosting. Claire moans and laughs at your panic, clearly enjoying your terror.")
+        wait {
+          if (RandomChance(20)) {
+            msg ("Your foot slips and the tongue scoops you into her mouth! You're swallowed before she even realizes.")
+            wait {
+              ClearScreen
+              MoveObject (player, digested)
+            }
+          }
+        }
+      </dodge>
+    </object>
+    <object name="keep taking photos">
+      <look>Your camera shakes in your hands, but you focus on your job.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Photograph</value>
+      </displayverbs>
+      <photograph type="script"><![CDATA[
+        msg ("You snap shot after shot of Claire's looming visage, trying to keep your composure. She opens wide and instructs you to get closer for the perfect angle.")
+        wait {
+          ClearScreen
+          MoveObject (player, inside mouth)
+        }
+      ]]></photograph>
+    </object>
+  </object>
+  <object name="inside mouth">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are inside</descprefix>
+    <look>Claire's mouth is a cavern of humid darkness, saliva pooling at your feet. Her tongue rises like a glistening beast beneath you.</look>
+    <description><![CDATA[<br/>The hot, sweet air tastes of vanilla and Claire's wine. Her booming laugh echoes painfully in the enclosed space. You struggle to keep your footing on the slick tongue as it moves you toward her throat. Perhaps you can {object:signal her} before you're swallowed.]]></description>
+    <object name="signal her">
+      <look>You wave and jump desperately.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Signal</value>
+      </displayverbs>
+      <signal type="script"><![CDATA[
+        msg ("You flail wildly, banging on her tongue. Claire lets out a surprised cough, ejecting you back onto her lower lip with a splatter of saliva.")
+        wait {
+          ClearScreen
+          MoveObject (player, dining table)
+        }
+      ]]></signal>
+    </object>
+    <object name="give up">
+      <look>You could simply wait and hope she spits you out.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Wait</value>
+      </displayverbs>
+      <wait type="script">
+        msg ("You cling to her tongue as she begins to chew the rest of the cupcake. The masticated mess surges around you, threatening to drag you down her throat.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("A strong swallow pulls you inexorably into the darkness of her gullet. There's no escape from digestion.")
+            wait { ClearScreen MoveObject (player, digested) }
+          }
+          else {
+            msg ("Just as you're about to be swallowed, Claire coughs, spitting you back onto her palm in a string of drool.")
+            wait { ClearScreen MoveObject (player, dining table) }
+          }
+        }
+      </wait>
+    </object>
+  </object>
+  <object name="digested">
+    <isroom />
+    <alias>stomach</alias>
+    <descprefix>You are</descprefix>
+    <look>Everything is darkness and burning acid. Your journey ends here.</look>
+    <description>You were devoured by your own aunt. Perhaps next time you'll be luckier.</description>
+  </object>
+  <object name="crushed">
+    <isroom />
+    <alias>under Claire</alias>
+    <descprefix>You were</descprefix>
+    <look>Claire's massive weight crushes the life from your body.</look>
+    <description>A careless move ended your career permanently.</description>
+  </object>
+  <object name="dead">
+    <isroom />
+    <alias>dead</alias>
+    <descprefix>You are</descprefix>
+    <look>Everything fades to black.</look>
+    <description>Your tiny body couldn't survive that stunt.</description>
+  </object>
+  <object name="bedroom">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are in</descprefix>
+    <look>Claire's bedroom is dominated by her messy bed. Her expression is hungry as she sets you down atop her chest.</look>
+    <description><![CDATA[<br/>She removes her bra with a dramatic flourish, letting her heavy breasts spill free. "Let's make these mountains look huge," she whispers. You stand atop the soft skin at the base of her left breast, staring up at the towering nipple. You can {object:start climbing}, {object:explore lower}, or beg her to stop.]]></description>
+    <object name="start climbing">
+      <look>The slope of flesh rises sharply above you.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Climb</value>
+      </displayverbs>
+      <climb type="script">
+        msg ("You dig your hands into the warm skin and begin the arduous climb toward her swelling nipple.")
+        wait {
+          if (RandomChance(25)) {
+            msg ("A sudden shudder of pleasure shakes Claire. You lose your grip and slide toward the deep valley between her breasts.")
+            wait {
+              if (RandomChance(50)) {
+                msg ("You tumble into the sweaty cleavage and are smothered between the gigantic mounds before she even notices.")
+                ClearScreen
+                MoveObject (player, crushed)
+              }
+              else {
+                msg ("You manage to scramble back to the surface, gasping for breath but alive.")
+              }
+            }
+          }
+        }
+      </climb>
+    </object>
+    <object name="explore lower">
+      <look>Claire mischievously slides a hand toward her panties.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Explore</value>
+      </displayverbs>
+      <explore type="script">
+        msg ("With a lustful grin, Claire pinches you gently and lowers you past her stomach toward the hem of her underwear.")
+        wait {
+          ClearScreen
+          MoveObject (player, crotch)
+        }
+      </explore>
+    </object>
+    <object name="beg her to stop">
+      <look>You shout up at Claire, hoping reason prevails.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Beg</value>
+      </displayverbs>
+      <beg type="script">
+        msg ("Your tiny pleas make Claire hesitate. She sighs, seeming to finally regain some sanity. With shaking hands she grabs the remote and grows you back to normal size on the floor beside the bed.")
+        wait {
+          ClearScreen
+          MoveObject (player, back to normal)
+        }
+      </beg>
+    </object>
+  </object>
+  <object name="crotch">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are among</descprefix>
+    <look>Dense pubic hairs rise around you like a dark forest. The musky scent of Claire's arousal fills the sweltering air.</look>
+    <description><![CDATA[<br/>Claire's body heat radiates all around you. Every breath from above sends tremors through the hairy landscape. She demands a few close-up shots of her panties while absentmindedly toying with the remote. You fear she might accidentally reduce you to a speck. You can {object:keep photographing} or {object:try to escape}.]]></description>
+    <object name="keep photographing">
+      <look>You dutifully raise the camera.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Photograph</value>
+      </displayverbs>
+      <photograph type="script">
+        msg ("You snap pictures of the towering folds of fabric and glistening skin. Claire moans softly, squeezing her thighs together.")
+        wait {
+          if (RandomChance(20)) {
+            msg ("Her thighs press too hard and the world goes black as you are crushed against her moist panties.")
+            ClearScreen
+            MoveObject (player, crushed)
+          }
+        }
+      </photograph>
+    </object>
+    <object name="try to escape">
+      <look>You look for a path through the coarse hairs.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Escape</value>
+      </displayverbs>
+      <escape type="script">
+        msg ("You scramble through the dense hairs, searching for daylight. Claire's massive fingers plunge after you, intent on keeping you in place.")
+        wait {
+          if (RandomChance(30)) {
+            msg ("Against all odds you slip past her grasp and tumble to the bed below, battered but free.")
+            ClearScreen
+            MoveObject (player, bedroom)
+          }
+          else {
+            msg ("Her fingers snare you easily. With a playful chuckle she shoves you back into the forest, trapping you once more.")
+          }
+        }
+      </escape>
+    </object>
+  </object>
+  <verb>
+    <property>photograph</property>
+    <pattern>photograph</pattern>
+    <defaultexpression>"You can't photograph " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>signal</property>
+    <pattern>signal</pattern>
+    <defaultexpression>"You can't signal " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>wait</property>
+    <pattern>wait</pattern>
+    <defaultexpression>"You can't wait " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>beg</property>
+    <pattern>beg</pattern>
+    <defaultexpression>"You can't beg " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>continue</property>
+    <pattern>continue</pattern>
+    <defaultexpression>"You can't continue " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>explore</property>
+    <pattern>explore</pattern>
+    <defaultexpression>"You can't explore " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>escape</property>
+    <pattern>escape</pattern>
+    <defaultexpression>"You can't escape " + object.article + "."</defaultexpression>
+  </verb>
+  <object name="back to normal">
+    <isroom />
+    <alias>living room</alias>
+    <descprefix>You are back in</descprefix>
+    <look>The room looms at its proper size again as you return to normal height.</look>
+    <description><![CDATA[<br/>Claire stammers apology after apology, horrified by how carried away she became. She promises to delete the photos if you want and offers you a stiff drink while you recover.]]></description>
+  </object>
+</asl>
