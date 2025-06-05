@@ -7,32 +7,31 @@
     <version>0.1</version>
     <firstpublished>2024</firstpublished>
     <author>boons123</author>
-    <description><![CDATA[You came to enjoy a relaxing break at a maid cafe in Tokyo, but the Spontaneous Shrinking Virus strikes without warning. Now you're tiny and the maids bustle around, unaware of the customer lost among the crumbs.]]></description>
+    <description>You came to enjoy a relaxing break at a maid cafe in Tokyo, but the Spontaneous Shrinking Virus strikes without warning. Now you're tiny and the maids bustle around, unaware of the customer lost among the crumbs.</description>
     <turnoffplacesandobjects type="boolean">false</turnoffplacesandobjects>
     <autodisplayverbs />
   </game>
-
   <object name="table top">
     <isroom />
     <descprefix>You are on</descprefix>
     <look>The table stretches before you like an endless wooden plain, every plate and cup a looming monument to your shrunken size.</look>
     <description><![CDATA[<br/>The polished wood of the table stretches for what feels like miles. A towering teacup looms nearby and plates of treats dwarf you. The maid who was serving you continues working, unaware that her customer has vanished from sight. Maybe you could get the {object:maid}'s attention or hide in the {object:teacup}. The edge of the table leads down to the {object:cafe floor}.]]></description>
     <usedefaultprefix type="boolean">false</usedefaultprefix>
-    <beforefirstenter type="script"><![CDATA[
+    <beforefirstenter type="script">
       msg ("A sudden bout of dizziness hits you. Before you can call for help, the world balloons outward. You've shrunk to a fraction of your former size!\n")
-    ]]></beforefirstenter>
+    </beforefirstenter>
     <object name="teacup">
       <look>The cup of tea you ordered now looks like a gigantic porcelain pool.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <climbin type="script"><![CDATA[
+      <climbin type="script">
         msg ("You clamber up the smooth side of the cup and tumble inside.")
         wait {
           ClearScreen
           MoveObject (player, inside teacup)
         }
-      ]]></climbin>
+      </climbin>
     </object>
     <object name="maid">
       <look>Your waitress towers above you, her frilly black and white uniform clinging to every voluptuous curve. The bodice strains around breasts that loom like mountains, each motion sending waves through her deep cleavage.</look>
@@ -42,9 +41,9 @@
         <value>Jump up and down</value>
       </displayverbs>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
-      <call type="script"><![CDATA[
+      <call type="script">
         msg ("You yell up at the maid, but your voice is tiny over the cafe chatter.")
-      ]]></call>
+      </call>
       <jumpupanddown type="script"><![CDATA[
         msg ("You jump and wave wildly, hoping to be noticed.")
         wait {
@@ -61,26 +60,26 @@
           }
         }
       ]]></jumpupanddown>
-      <jumpto type="script"><![CDATA[
+      <jumpto type="script">
         msg ("You make a running leap toward her apron.")
         wait {
           ClearScreen
           MoveObject (player, maid apron)
         }
-      ]]></jumpto>
+      </jumpto>
     </object>
     <object name="cafe floor">
       <look>The floor far below is dotted with legs and scurrying customers.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <climbdown type="script"><![CDATA[
+      <climbdown type="script">
         msg ("Carefully you lower yourself over the side of the table and descend toward the floor.")
         wait {
           ClearScreen
           MoveObject (player, cafe floor room)
         }
-      ]]></climbdown>
+      </climbdown>
     </object>
     <object name="player">
       <displayverbs type="stringlist">
@@ -88,7 +87,6 @@
       </displayverbs>
     </object>
   </object>
-
   <verb>
     <property>climbin</property>
     <pattern>climb in</pattern>
@@ -109,7 +107,6 @@
     <pattern>jump up and down</pattern>
     <defaultexpression>"You can't jump up and down " + object.article + "."</defaultexpression>
   </verb>
-
   <object name="inside teacup">
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
@@ -121,13 +118,13 @@
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <climbout type="script"><![CDATA[
+      <climbout type="script">
         msg ("You scramble back up the slick side of the cup to the table.")
         wait {
           ClearScreen
           MoveObject (player, table top)
         }
-      ]]></climbout>
+      </climbout>
     </object>
   </object>
   <verb>
@@ -135,7 +132,6 @@
     <pattern>climb out</pattern>
     <defaultexpression>"You can't climb out " + object.article + "."</defaultexpression>
   </verb>
-
   <object name="maid apron">
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
@@ -147,25 +143,24 @@
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <climbdown type="script"><![CDATA[
+      <climbdown type="script">
         msg ("You let go and plunge toward the floor, landing with a thump on the polished tile.")
         wait {
           ClearScreen
           MoveObject (player, cafe floor room)
         }
-      ]]></climbdown>
+      </climbdown>
     </object>
   </object>
-
   <object name="maid bra">
     <isroom />
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are pressed inside</descprefix>
     <look>The snug fabric cave squeezes around you, dominated by the enormous breast filling the bra.</look>
     <description><![CDATA[<br/>Soft, warm fabric surrounds you and everything smells faintly of perfume. You are wedged deep in the maid's bra, squashed against her large, plump, milky white breast. Every breath is filled with her scent and each movement makes the heavy mound ripple around you.]]></description>
-    <enter type="script"><![CDATA[
+    <enter type="script">
       set (player, "bra_count", 0)
-    ]]></enter>
+    </enter>
     <object name="breast">
       <look>The massive breast swells before you like a pale hillside, its silky skin slick with heat and impossibly huge.</look>
       <displayverbs type="stringlist">
@@ -173,7 +168,7 @@
         <value>Kiss</value>
         <value>Struggle</value>
       </displayverbs>
-      <kiss type="script"><![CDATA[
+      <kiss type="script">
         if (not HasInt(player, "bra_count")) {
           set (player, "bra_count", 0)
         }
@@ -181,15 +176,12 @@
         if (GetInt(player, "bra_count") = 1) {
           msg ("You lean forward and kiss the maid's skin. The warm flesh rises above you like a living wall, salty and sweet on your tongue.")
         }
-        elseif (GetInt(player, "bra_count") = 2) {
-          msg ("Unable to resist, you kiss again. The colossal boob pulses around you, its heavy weight nearly engulfing your tiny form with each heartbeat.")
-        }
         else {
           msg ("Lost in your obsession, you keep kissing until the maid sighs happily and squeezes her breasts together. The soft avalanche crushes the life from you.")
           finish
         }
-      ]]></kiss>
-      <struggle type="script"><![CDATA[
+      </kiss>
+      <struggle type="script">
         if (not HasInt(player, "bra_count")) {
           set (player, "bra_count", 0)
         }
@@ -197,14 +189,11 @@
         if (GetInt(player, "bra_count") = 1) {
           msg ("You thrash in panic, but the yielding flesh simply molds around you, pinning you tighter against the monumental breast.")
         }
-        elseif (GetInt(player, "bra_count") = 2) {
-          msg ("Your frantic movements only make the maid giggle. Her titanic boob jiggles and shifts, sliding you even deeper into its pillowy mass.")
-        }
         else {
           msg ("Exhausted, you keep struggling until the weight of her breast seals over your face. Darkness and softness smother you forever.")
           finish
         }
-      ]]></struggle>
+      </struggle>
     </object>
     <object name="nipple">
       <look>The maid's rosy nipple juts out before you like a mountain peak.</look>
@@ -213,7 +202,7 @@
         <value>Lick</value>
         <value>Kiss</value>
       </displayverbs>
-      <kiss type="script"><![CDATA[
+      <kiss type="script">
         if (not HasInt(player, "bra_count")) {
           set (player, "bra_count", 0)
         }
@@ -221,15 +210,12 @@
         if (GetInt(player, "bra_count") = 1) {
           msg ("You plant a kiss on the gigantic nipple, your body dwarfed by the stiff peak.")
         }
-        elseif (GetInt(player, "bra_count") = 2) {
-          msg ("You nuzzle and kiss eagerly, the huge nub pulsing beneath your lips.")
-        }
         else {
           msg ("Lost in pleasure, the maid hugs her breasts together, the enormous nipple crushing you mercilessly.")
           finish
         }
-      ]]></kiss>
-      <lick type="script"><![CDATA[
+      </kiss>
+      <lick type="script">
         if (not HasInt(player, "bra_count")) {
           set (player, "bra_count", 0)
         }
@@ -237,17 +223,13 @@
         if (GetInt(player, "bra_count") = 1) {
           msg ("You drag your tongue along the vast nipple, tasting her warm skin and perfume.")
         }
-        elseif (GetInt(player, "bra_count") = 2) {
-          msg ("Your licking sends tiny shivers through the colossal breast, pressing you deeper against it.")
-        }
         else {
           msg ("Overwhelmed, the maid presses a finger against the nipple, unknowingly smashing you flat.")
           finish
         }
-      ]]></lick>
+      </lick>
     </object>
   </object>
-
   <object name="cafe floor room">
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <alias>cafe floor</alias>
@@ -259,13 +241,13 @@
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <climb type="script"><![CDATA[
+      <climb type="script">
         msg ("You start scaling the chair leg, using small grooves for handholds.")
         wait {
           ClearScreen
           MoveObject (player, chair seat)
         }
-      ]]></climb>
+      </climb>
     </object>
     <object name="hiker">
       <look>The sweaty hiker looms above, a cheerful brunette with glasses and a shining septum ring. Tight shorts cling to her sculpted backside, and her thin tank top does nothing to hide perky breasts and hard nipples. From down here she looks unbelievably huge.</look>
@@ -275,9 +257,9 @@
         <value>Jump up and down</value>
       </displayverbs>
       <usedefaultprefix type="boolean">false</usedefaultprefix>
-      <call type="script"><![CDATA[
+      <call type="script">
         msg ("You shout for help, but your voice is lost in the cafe's chatter.")
-      ]]></call>
+      </call>
       <jumpupanddown type="script"><![CDATA[
         msg ("You hop frantically, waving at the towering hiker.")
         wait {
@@ -301,13 +283,11 @@
     <pattern>climb</pattern>
     <defaultexpression>"You can't climb " + object.article + "."</defaultexpression>
   </verb>
-
   <verb>
     <property>struggle</property>
     <pattern>struggle</pattern>
     <defaultexpression>"You can't struggle " + object.article + "."</defaultexpression>
   </verb>
-
   <verb>
     <property>lick</property>
     <pattern>lick</pattern>
@@ -318,7 +298,6 @@
     <pattern>scratch</pattern>
     <defaultexpression>"You can't scratch " + object.article + "."</defaultexpression>
   </verb>
-
   <object name="chair seat">
     <usedefaultprefix type="boolean">false</usedefaultprefix>
     <descprefix>You are on</descprefix>
@@ -329,26 +308,26 @@
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <climbdown type="script"><![CDATA[
+      <climbdown type="script">
         msg ("You carefully slide back down to the floor.")
         wait {
           ClearScreen
           MoveObject (player, cafe floor room)
         }
-      ]]></climbdown>
+      </climbdown>
     </object>
     <object name="back to table">
       <look>The table surface is close enough to leap toward.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
       </displayverbs>
-      <jumpto type="script"><![CDATA[
+      <jumpto type="script">
         msg ("You leap toward the table, grabbing onto the edge.")
         wait {
           ClearScreen
           MoveObject (player, table top)
         }
-      ]]></jumpto>
+      </jumpto>
     </object>
   </object>
   <object name="hiker crack">
@@ -358,19 +337,19 @@
     <alias>hiker's cheeks</alias>
     <look>The hot darkness of her butt engulfs you, the slick walls pressing from every side. Sweat beads roll along the vast curves above, trickling down to pool around you and filling the space with steamy heat.</look>
     <description><![CDATA[<br/>Sweat from the hiker's trek coats everything, filling the air with a sharp musk. The towering cheeks swell on either side of you like flexing pillars, each subtle shift grinding you toward her twitching {object:anus}. The humid space throbs with her heartbeat and you know she expects you to get to work.]]></description>
-    <enter type="script"><![CDATA[
+    <enter type="script">
       set (player, "scratch_count", 0)
       set (player, "struggle_count", 0)
-    ]]></enter>
+    </enter>
     <object name="climb toward light">
       <look>A faint sliver of light marks the way out between her cheeks.</look>
       <displayverbs type="stringlist">
         <value>Look at</value>
         <value>Climb out</value>
       </displayverbs>
-      <climbout type="script"><![CDATA[
+      <climbout type="script">
         msg ("You scramble toward the opening, but a massive finger presses down, shoving you back into the sweltering crack. \"Stay put and scratch,\" she chides with a chuckle.")
-      ]]></climbout>
+      </climbout>
     </object>
     <object name="anus">
       <look>The puckered ring clenches and relaxes impatiently, easily large enough to swallow you. Each ripple sends glistening wrinkles rolling outward, leaving trails of sweat that glimmer in the dim light. The huge star flexes hungrily, practically begging for attention.</look>
@@ -387,9 +366,6 @@
         if (GetInt(player, "scratch_count") = 1) {
           msg ("You rake your hands across the wrinkled skin, the texture slick and clammy beneath your fingertips. A relieved sigh booms from far above as the flesh loosens slightly around you. Heat radiates from the colossal ring, pulsing in time with the hiker's quick breaths.")
         }
-        elseif (GetInt(player, "scratch_count") = 2) {
-          msg ("You keep at it, digging your fingers in as deep as you dare. The vast ring muscles quiver around you, oozing more slippery moisture that coats your arms and face. Her appreciative groan reverberates through the flesh, making it quiver and squeeze you even tighter.")
-        }
         else {
           msg ("Your relentless scratching proves too good. The immense ring loosens all at once, gaping wide in greedy anticipation. With a noisy slurp, the slick opening draws you forward, the world shrinking to a tunnel of flexing flesh that swallows you inch by inch. Wet walls ripple hungrily around you as you are dragged helplessly deeper, a satisfied moan echoing from above as darkness closes in.")
           msg ("<br/><br/><b>GAME OVER: Lost within the depths of the hiker's ass, you're forgotten as nothing more than a satisfying itch.</b>")
@@ -402,10 +378,7 @@
         }
         set (player, "struggle_count", GetInt(player, "struggle_count") + 1)
         if (GetInt(player, "struggle_count") = 1) {
-          msg ("You push futilely at the slippery flesh, your hands sliding over the sweat-slicked canyon walls. The hiker's amused voice rumbles overhead, "Come on, scratch already!" The impatient sphincter flexes around you, sending a shiver through the cramped space.")
-        }
-        elseif (GetInt(player, "struggle_count") = 2) {
-          msg ("Your continued wriggling only makes her clench harder around you. The sweaty cavern grows even tighter, squashing you between walls of flesh as her amusement shifts toward annoyance.")
+          msg ("You push futilely at the slippery flesh, your hands sliding over the sweat-slicked canyon walls. The hiker's amused voice rumbles overhead, \"Come on, scratch already!\" The impatient sphincter flexes around you, sending a shiver through the cramped space.")
         }
         else {
           msg ("With an annoyed grunt, she flexes her powerful cheeks. The slick walls slam together, grinding you from every side. Air bursts from your lungs as the crushing pressure pops your tiny body with humiliating ease.")
