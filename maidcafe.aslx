@@ -267,6 +267,34 @@
         }
       ]]></climb>
     </object>
+    <object name="hiker">
+      <look>The sweaty hiker looms above, a cheerful brunette with glasses and a shining septum ring. Tight shorts cling to her sculpted backside, and her thin tank top does nothing to hide perky breasts and hard nipples. From down here she looks unbelievably huge.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Call</value>
+        <value>Jump up and down</value>
+      </displayverbs>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <call type="script"><![CDATA[
+        msg ("You shout for help, but your voice is lost in the cafe's chatter.")
+      ]]></call>
+      <jumpupanddown type="script"><![CDATA[
+        msg ("You hop frantically, waving at the towering hiker.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("Her brown eyes widen behind her glasses. \"Whoa, a tiny person!\" she whispers excitedly.")
+            msg ("<br/>She quickly scoops you up and hurries to the bathroom. With a grin, she yanks down her shorts and panties and drops you onto her puckered anus. \"Scratch that itch for me, little helper,\" she chuckles before pulling everything back into place.")
+            wait {
+              ClearScreen
+              MoveObject (player, hiker crack)
+            }
+          }
+          else {
+            msg ("She keeps sipping her water, oblivious to you.")
+          }
+        }
+      ]]></jumpupanddown>
+    </object>
   </object>
   <verb>
     <property>climb</property>
@@ -284,6 +312,11 @@
     <property>lick</property>
     <pattern>lick</pattern>
     <defaultexpression>"You can't lick " + object.article + "."</defaultexpression>
+  </verb>
+  <verb>
+    <property>scratch</property>
+    <pattern>scratch</pattern>
+    <defaultexpression>"You can't scratch " + object.article + "."</defaultexpression>
   </verb>
 
   <object name="chair seat">
@@ -316,6 +349,70 @@
           MoveObject (player, table top)
         }
       ]]></jumpto>
+    </object>
+  </object>
+  <object name="hiker crack">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are wedged between the</descprefix>
+    <alias>hiker's cheeks</alias>
+    <look>The hot darkness of her butt engulfs you, the slick walls pressing from every side. Sweat beads roll along the vast curves above, trickling down to pool around you and filling the space with steamy heat.</look>
+    <description><![CDATA[<br/>Sweat from the hiker's trek coats everything, filling the air with a sharp musk. The towering cheeks swell on either side of you like flexing pillars, each subtle shift grinding you toward her twitching {object:anus}. The humid space throbs with her heartbeat and you know she expects you to get to work.]]></description>
+    <enter type="script"><![CDATA[
+      set (player, "scratch_count", 0)
+      set (player, "struggle_count", 0)
+    ]]></enter>
+    <object name="climb toward light">
+      <look>A faint sliver of light marks the way out between her cheeks.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Climb out</value>
+      </displayverbs>
+      <climbout type="script"><![CDATA[
+        msg ("You scramble toward the opening, but a massive finger presses down, shoving you back into the sweltering crack. \"Stay put and scratch,\" she chides with a chuckle.")
+      ]]></climbout>
+    </object>
+    <object name="anus">
+      <look>The puckered ring clenches and relaxes impatiently, easily large enough to swallow you. Each ripple sends glistening wrinkles rolling outward, leaving trails of sweat that glimmer in the dim light. The huge star flexes hungrily, practically begging for attention.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Scratch</value>
+        <value>Struggle</value>
+      </displayverbs>
+      <scratch type="script"><![CDATA[
+        if (not HasInt(player, "scratch_count")) {
+          set (player, "scratch_count", 0)
+        }
+        set (player, "scratch_count", GetInt(player, "scratch_count") + 1)
+        if (GetInt(player, "scratch_count") = 1) {
+          msg ("You rake your hands across the wrinkled skin, the texture slick and clammy beneath your fingertips. A relieved sigh booms from far above as the flesh loosens slightly around you. Heat radiates from the colossal ring, pulsing in time with the hiker's quick breaths.")
+        }
+        elseif (GetInt(player, "scratch_count") = 2) {
+          msg ("You keep at it, digging your fingers in as deep as you dare. The vast ring muscles quiver around you, oozing more slippery moisture that coats your arms and face. Her appreciative groan reverberates through the flesh, making it quiver and squeeze you even tighter.")
+        }
+        else {
+          msg ("Your relentless scratching proves too good. The immense ring loosens all at once, gaping wide in greedy anticipation. With a noisy slurp, the slick opening draws you forward, the world shrinking to a tunnel of flexing flesh that swallows you inch by inch. Wet walls ripple hungrily around you as you are dragged helplessly deeper, a satisfied moan echoing from above as darkness closes in.")
+          msg ("<br/><br/><b>GAME OVER: Lost within the depths of the hiker's ass, you're forgotten as nothing more than a satisfying itch.</b>")
+          finish
+        }
+      ]]></scratch>
+      <struggle type="script"><![CDATA[
+        if (not HasInt(player, "struggle_count")) {
+          set (player, "struggle_count", 0)
+        }
+        set (player, "struggle_count", GetInt(player, "struggle_count") + 1)
+        if (GetInt(player, "struggle_count") = 1) {
+          msg ("You push futilely at the slippery flesh, your hands sliding over the sweat-slicked canyon walls. The hiker's amused voice rumbles overhead, "Come on, scratch already!" The impatient sphincter flexes around you, sending a shiver through the cramped space.")
+        }
+        elseif (GetInt(player, "struggle_count") = 2) {
+          msg ("Your continued wriggling only makes her clench harder around you. The sweaty cavern grows even tighter, squashing you between walls of flesh as her amusement shifts toward annoyance.")
+        }
+        else {
+          msg ("With an annoyed grunt, she flexes her powerful cheeks. The slick walls slam together, grinding you from every side. Air bursts from your lungs as the crushing pressure pops your tiny body with humiliating ease.")
+          msg ("<br/><br/><b>GAME OVER: Crushed between massive cheeks, you leave only a sweaty stain.</b>")
+          finish
+        }
+      ]]></struggle>
     </object>
   </object>
 </asl>
