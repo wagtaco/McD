@@ -304,6 +304,45 @@
         </jumpto>
       </object>
     </object>
+    <object name="futa maid">
+      <look>The petite maid flits between tables, her frilly skirt swirling past your tiny form. From down here she appears as proper as the others, though the front of her apron bulges in a way you can't quite explain.</look>
+      <description><![CDATA[<br/>Her face beams with cheerful energy as she serves customers. At your size you can't help noticing how the fabric of her apron strains near her thighs. Something about her movements seems oddly careful, as if she's hiding a secret.]]></description>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Call</value>
+        <value>Jump up and down</value>
+      </displayverbs>
+      <usedefaultprefix type="boolean">false</usedefaultprefix>
+      <call type="script">
+        msg ("You call up, but the clatter of dishes drowns out your voice.")
+      </call>
+      <jumpupanddown type="script"><![CDATA[
+        msg ("You jump and wave desperately at the towering maid.")
+        wait {
+          if (RandomChance(50)) {
+            msg ("She blinks down at you in disbelief, then smiles widely. \"Oh my, a tiny customer!\" she whispers.")
+            msg ("<br/>Cupping you carefully, she rushes toward the staff bathroom. The door clicks locked as she steps inside.")
+            msg ("She sets you on the counter a moment, licking her lips in anticipation.")
+            msg ("Her fingers tease the waistband of her underwear, revealing a glimpse of flushed skin you weren't expecting.")
+            msg ("With a sly grin she pulls open her panties and drops you against something warm and oddly smooth. \"Enjoy the view, little one,\" she giggles.")
+            wait {
+              ClearScreen
+              MoveObject (player, futa panties)
+            }
+          }
+          else {
+            msg ("She turns away before noticing you.")
+          }
+        }
+      ]]></jumpupanddown>
+      <object name="under skirt">
+        <look>Peering up beneath her skirt reveals a shadowed bulge pressing against silky panties. Whatever it is, it's enormous.</look>
+        <displayverbs type="stringlist">
+          <value>Look at</value>
+        </displayverbs>
+      </object>
+    </object>
+  </object>
   <verb>
     <property>climb</property>
     <pattern>climb</pattern>
@@ -419,6 +458,220 @@
       ]]></struggle>
     </object>
   </object>
+  <object name="futa panties">
+    <isroom />
+    <usedefaultprefix type="boolean">false</usedefaultprefix>
+    <descprefix>You are pressed against</descprefix>
+  <alias>futa maid's panties</alias>
+  <look>The dark space is humid and close. A tremendous shaft arches above you while two heavy balls crowd below, all barely held back by thin fabric.</look>
+  <beforefirstenter type="script">
+    msg ("The panties snap shut above you, trapping you in oppressive heat.")
+    msg ("The maid's body scent fills your lungs as the world shakes with her steps.")
+    msg ("Somehow you have ended up in the very front of her underwear, face to face with her monstrous package.")
+  </beforefirstenter>
+  <description><![CDATA[<br/>The maid's underwear squeezes you against her surprising anatomy. Each slow step she takes makes the monstrous {object:shaft} shift and the swollen {object:balls} jostle. High above, the {object:cock head} watches over you like a fleshy moon. There is no escape from this steamy prison.]]></description>
+    <enter type="script">
+      set (player, "head_lick", 0)
+      set (player, "head_struggle", 0)
+      set (player, "shaft_lick", 0)
+      set (player, "shaft_struggle", 0)
+      set (player, "balls_lick", 0)
+      set (player, "balls_struggle", 0)
+    </enter>
+    <object name="cock head">
+      <look>The glistening crown swells above you, purple and slick with precum.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Lick</value>
+        <value>Struggle</value>
+      </displayverbs>
+      <lick type="script"><![CDATA[
+        if (not HasInt(player, "head_lick")) {
+          set (player, "head_lick", 0)
+        }
+        set (player, "head_lick", GetInt(player, "head_lick") + 1)
+        if (GetInt(player, "head_lick") = 1) {
+          msg ("You run your tongue along the enormous glans, drowning in salty heat.")
+          msg ("The surface throbs beneath you, sending quivers through your body.")
+          msg ("A distant sigh of pleasure rumbles from the maid.")
+          msg ("The head twitches but remains mostly soft.")
+        }
+        elseif (GetInt(player, "head_lick") = 2) {
+          msg ("You keep licking hungrily, tracing the crown's sensitive rim.")
+          wait {
+            msg ("The swollen head bulges, shoving you back against the silky fabric.")
+          }
+          msg ("Precum beads beside you, perfuming the stifling air.")
+          msg ("Everything feels hotter by the second.")
+        }
+        else {
+          msg ("Your worship proves too much. The cock stiffens violently, crushing you against the cloth.")
+          msg ("Bones snap as the engorged head swells larger than ever.")
+          msg ("Agony flashes before darkness claims you.")
+          msg ("Your tiny frame can't withstand the sudden pressure.")
+          msg ("<br/><br/><b>GAME OVER: Burst by the futa maid's erection.</b>")
+          finish
+        }
+      ]]></lick>
+      <struggle type="script"><![CDATA[
+        if (not HasInt(player, "head_struggle")) {
+          set (player, "head_struggle", 0)
+        }
+        set (player, "head_struggle", GetInt(player, "head_struggle") + 1)
+        if (GetInt(player, "head_struggle") = 1) {
+          msg ("You shove at the slippery crown, but it only squishes around you.")
+          msg ("The panties press from behind, pinning you in place.")
+          msg ("A faint tremor runs through the soft head.")
+          msg ("It stays lazily limp despite your efforts.")
+        }
+        elseif (GetInt(player, "head_struggle") = 2) {
+          msg ("Your panicked thrashing slides you downward, sticky precum coating your body.")
+          msg ("The space grows darker as you slip under the shaft.")
+          msg ("Breath comes harder in the humid air.")
+          msg ("You sense the crushing weight looming above.")
+        }
+        else {
+          msg ("With a final wriggle you wedge fully beneath the heavy cock.")
+          wait {
+            msg ("Warm skin seals over your face, smothering your tiny body.")
+          }
+          msg ("Your struggles weaken until everything fades to black.")
+          msg ("There is nothing but pulsing heat and darkness.")
+          msg ("<br/><br/><b>GAME OVER: Smothered under the futa maid's cock.</b>")
+          finish
+        }
+      ]]></struggle>
+    </object>
+    <object name="shaft">
+      <look>The thick shaft rises like a muscular column, veins pulsing beneath its skin.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Lick</value>
+        <value>Struggle</value>
+      </displayverbs>
+      <lick type="script"><![CDATA[
+        if (not HasInt(player, "shaft_lick")) {
+          set (player, "shaft_lick", 0)
+        }
+        set (player, "shaft_lick", GetInt(player, "shaft_lick") + 1)
+        if (GetInt(player, "shaft_lick") = 1) {
+          msg ("You plant kisses along the steamy shaft, tasting musk and sweat.")
+          msg ("Veins throb bigger than tree roots beneath your feet.")
+          msg ("The flesh stirs slightly at your attention.")
+          msg ("It remains soft enough to bend.")
+        }
+        elseif (GetInt(player, "shaft_lick") = 2) {
+          msg ("You lick up a pulsing vein, feeling it swell beneath you.")
+          msg ("The entire shaft shifts, beginning to stiffen.")
+          wait {
+            msg ("A low moan echoes around you as heat floods the cramped space.")
+          }
+          msg ("You brace yourself against the expanding flesh.")
+        }
+        else {
+          msg ("Your worship forces the shaft fully erect with brutal speed.")
+          msg ("It rams you into the cloth wall, crushing every bone in your body.")
+          msg ("Your vision fills with blinding pain before nothing.")
+          msg ("You hear the maid gasp in bliss as your body gives way.")
+          msg ("<br/><br/><b>GAME OVER: Crushed by the rising shaft.</b>")
+          finish
+        }
+      ]]></lick>
+      <struggle type="script"><![CDATA[
+        if (not HasInt(player, "shaft_struggle")) {
+          set (player, "shaft_struggle", 0)
+        }
+        set (player, "shaft_struggle", GetInt(player, "shaft_struggle") + 1)
+        if (GetInt(player, "shaft_struggle") = 1) {
+          msg ("You push at the pliant flesh, but it merely ripples around you.")
+          msg ("Silky fabric presses from behind, keeping you trapped.")
+          msg ("Sweat slicks your hands, making your grip useless.")
+          msg ("The shaft stays relaxed for the moment.")
+        }
+        elseif (GetInt(player, "shaft_struggle") = 2) {
+          msg ("Your struggles slide you beneath the warm column.")
+          msg ("The weight settles heavily on your chest.")
+          msg ("Breathing becomes a fight in the tight space.")
+          msg ("You feel the shaft sagging against you ominously.")
+        }
+        else {
+          msg ("Pinned under the heavy meat, you can no longer move.")
+          wait {
+            msg ("The last of your air seeps out as the cock presses flat against you.")
+          }
+          msg ("Darkness swallows you as you suffocate.")
+          msg ("Your limbs twitch uselessly beneath the crushing weight.")
+          msg ("<br/><br/><b>GAME OVER: Smothered beneath the shaft.</b>")
+          finish
+        }
+      ]]></struggle>
+    </object>
+    <object name="balls">
+      <look>The enormous balls crowd the space, each one heavy enough to flatten you with ease.</look>
+      <displayverbs type="stringlist">
+        <value>Look at</value>
+        <value>Lick</value>
+        <value>Struggle</value>
+      </displayverbs>
+      <lick type="script"><![CDATA[
+        if (not HasInt(player, "balls_lick")) {
+          set (player, "balls_lick", 0)
+        }
+        set (player, "balls_lick", GetInt(player, "balls_lick") + 1)
+        if (GetInt(player, "balls_lick") = 1) {
+          msg ("You lick across the silky sack, savoring its salty taste.")
+          msg ("A tremor runs through the heavy orb under your hands.")
+          msg ("The heat radiating from it is incredible.")
+          msg ("You hear a soft hum of delight above.")
+        }
+        elseif (GetInt(player, "balls_lick") = 2) {
+          msg ("You keep lapping, coaxing the ball tighter against your body.")
+          wait {
+            msg ("The enormous orb draws upward, churning with need.")
+          }
+          msg ("The cramped space grows even hotter.")
+          msg ("You can barely breathe the musky air.")
+        }
+        else {
+          msg ("The balls tense violently, ramming you against the unyielding shaft.")
+          msg ("Your body pops under the sudden pressure.")
+          msg ("A flood of heat washes over your remains.")
+          msg ("Her balls churn happily around the tiny mess you've become.")
+          msg ("<br/><br/><b>GAME OVER: Crushed by the maid's balls.</b>")
+          finish
+        }
+      ]]></lick>
+      <struggle type="script"><![CDATA[
+        if (not HasInt(player, "balls_struggle")) {
+          set (player, "balls_struggle", 0)
+        }
+        set (player, "balls_struggle", GetInt(player, "balls_struggle") + 1)
+        if (GetInt(player, "balls_struggle") = 1) {
+          msg ("You shove at the massive balls, but they simply jiggle and trap you.")
+          msg ("Their weight presses you hard into the fabric.")
+          msg ("Sweat slicks your skin, making escape impossible.")
+          msg ("The shaft above droops heavily across your back.")
+        }
+        elseif (GetInt(player, "balls_struggle") = 2) {
+          msg ("Your thrashing slips you into the sweaty fold beneath the shaft.")
+          msg ("Hot skin molds around you from all directions.")
+          msg ("Each breath burns your lungs with musk.")
+          msg ("You feel yourself sinking deeper.")
+        }
+        else {
+          msg ("Trapped between cock and balls, you can no longer breathe.")
+          wait {
+            msg ("Your vision darkens as the crushing heat steals your final breath.")
+          }
+          msg ("You go limp, unseen and forgotten.")
+          msg ("The enormous orbs grind together, sealing your fate.")
+          msg ("<br/><br/><b>GAME OVER: Suffocated by the maid's balls.</b>")
+          finish
+        }
+      ]]></struggle>
+    </object>
+  </object>
+=======
 
   <object name="counter walkway">
     <isroom />
